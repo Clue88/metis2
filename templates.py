@@ -10,3 +10,6 @@ def render_template(path, replacements={}):
     f.close()
 
     return Template(s).safe_substitute(replacements)
+
+def redirect(page):
+    return render_template('redirect.html', {'page': page})
