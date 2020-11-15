@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Register</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
+        <link rel='apple-touch-icon' href='static/favicon.ico' />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
+        <script>
+            function errMsg(name, msg) {
+                document.getElementById(name).innerHTML = msg;
+                document.forms[0][name].classList.add("is-danger");
+                document.getElementById(name).classList.add("is-danger");
+            }
+
+            function validateForm() {
+                good = true;
+                let form = document.forms[0];
+                let errs = document.getElementsByClassName("is-danger");
+                while (errs[0]) {
+                    errs[0].innerHTML = "";
+                    errs[0].classList.remove("is-danger");
+                }
+
+                if (!/(.)\w+([@])\w+([.])\w+/g.test(form['email'].value)) {
+                    errMsg("email", "Please enter a valid email address.");
+                    good = false;
+                }
+                if (form['name'].value === "") {
+                    errMsg("name", "You have to at least have something here.");
+                    good = false;
+                }
+                if (form['password'].value.length < 8) {
+                    errMsg("password", "Eight characters, please.");
+                    good = false;
+                }
+                if (form['repeat'].value != form['password'].value) {
+                    errMsg("repeat", "Passwords do not match.");
+                    good = false;
+                }
+                for (i = 1; i <= 10; i++) {
+                    if (form["p"+i+"a"].value === "") {
+                        errMsg("p"+i+"a", "Please enter a value. You can enter \"Free Period\" if you don't have a class here.");
+                        good = false;
+                    }
+                }
+                return good;
+            }
+        </script>
+    </head>
+    <body style="margin:15px">
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <p class="title">Register</p>
+                    <p class="subtitle has-text-info-dark">Welcome to Metis! You can get started by registering below.</p>
+                    <a class="has-text-link" href="login.py">Existing user? Click here.</a>
+                </article>
+            </div>
+        </div>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child notification is-light">
+                    <form method="GET" action="form_register.py" onsubmit="return validateForm()">
+                        <div class="field">
+                            <label class="label">Email Address</label>
+                            <div class="control">
+                                <p class="help">We'll only use this if we need to contact you for a password reset.</p>
+                                <input class="input" type="text" name="email">
+                                <p class="help" id="email"></p>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Your Name</label>
+                            <div class="control">
+                                <p class="help">First and last. Or just first. Or even just last.</p>
+                                <input class="input" type="text" name="name">
+                                <p class="help" id="name"></p>
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <p class="help">Eight characters so you can have some semblence of cybersecurity.</p>
+                                <input class="input" type="password" name="password">
+                                <p class="help" id="password"></p>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Repeat Password</label>
+                            <div class="control">
+                                <input class="input" type="password" name="repeat">
+                                <p class="help" id="repeat"></p>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Classes</label>
+                            <div class="control">
+                                <p class="help">You'll now input all of your classes so you can have a consolidated schedule with all of your Zoom links. Feel free to leave any spaces blank where you don't have information. If you have the same class on both A and B days, you can leave the B day slot blank.</p>
+                                <input class="input" type="text" name="p1a" placeholder="Period 1 Class Day A">
+                                <p class="help" id=p1a></p>
+                                <input class="input" type="text" name="p1za" placeholder="Period 1 Zoom Link Day A">
+                                <input class="input" type="text" name="p1b" placeholder="Period 1 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p1zb" placeholder="Period 1 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p2a" placeholder="Period 2 Class Day A">
+                                <p class="help" id=p2a></p>
+                                <input class="input" type="text" name="p2za" placeholder="Period 2 Zoom Link Day A">
+                                <input class="input" type="text" name="p2b" placeholder="Period 2 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p2zb" placeholder="Period 2 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p3a" placeholder="Period 3 Class Day A">
+                                <p class="help" id=p3a></p>
+                                <input class="input" type="text" name="p3za" placeholder="Period 3 Zoom Link Day A">
+                                <input class="input" type="text" name="p3b" placeholder="Period 3 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p3zb" placeholder="Period 3 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p4a" placeholder="Period 4 Class Day A">
+                                <p class="help" id=p4a></p>
+                                <input class="input" type="text" name="p4za" placeholder="Period 4 Zoom Link Day A">
+                                <input class="input" type="text" name="p4b" placeholder="Period 4 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p4zb" placeholder="Period 4 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p5a" placeholder="Period 5 Class Day A">
+                                <p class="help" id=p5a></p>
+                                <input class="input" type="text" name="p5za" placeholder="Period 5 Zoom Link Day A">
+                                <input class="input" type="text" name="p5b" placeholder="Period 5 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p5zb" placeholder="Period 5 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p6a" placeholder="Period 6 Class Day A">
+                                <p class="help" id=p6a></p>
+                                <input class="input" type="text" name="p6za" placeholder="Period 6 Zoom Link Day A">
+                                <input class="input" type="text" name="p6b" placeholder="Period 6 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p6zb" placeholder="Period 6 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p7a" placeholder="Period 7 Class Day A">
+                                <p class="help" id=p7a></p>
+                                <input class="input" type="text" name="p7za" placeholder="Period 7 Zoom Link Day A">
+                                <input class="input" type="text" name="p7b" placeholder="Period 7 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p7zb" placeholder="Period 7 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p8a" placeholder="Period 8 Class Day A">
+                                <p class="help" id=p8a></p>
+                                <input class="input" type="text" name="p8za" placeholder="Period 8 Zoom Link Day A">
+                                <input class="input" type="text" name="p8b" placeholder="Period 8 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p8zb" placeholder="Period 8 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p9a" placeholder="Period 9 Class Day A">
+                                <p class="help" id=p9a></p>
+                                <input class="input" type="text" name="p9za" placeholder="Period 9 Zoom Link Day A">
+                                <input class="input" type="text" name="p9b" placeholder="Period 9 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p9zb" placeholder="Period 9 Zoom Link Day B (if necessary)">
+                                <br><br>
+                                <input class="input" type="text" name="p10a" placeholder="Period 10 Class Day A">
+                                <p class="help" id=p10a></p>
+                                <input class="input" type="text" name="p10za" placeholder="Period 10 Zoom Link Day A">
+                                <input class="input" type="text" name="p10b" placeholder="Period 10 Class Day B (if necessary)">
+                                <input class="input" type="text" name="p10zb" placeholder="Period 10 Zoom Link Day B (if necessary)">
+                            </div>
+                        </div>
+    
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <input class="input button is-link" type="submit" value="Register">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

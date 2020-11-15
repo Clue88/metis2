@@ -7,6 +7,11 @@ cgitb.enable()
 from templates import render_template
 
 def main():
-    print(render_template('login.html'))
+    form = cgi.FieldStorage()
+    if (form.getvalue('login') == 'success'):
+        print(render_template('login.html', {'msg': 'Success! You can log in now.'}))
+    else:
+        print(render_template('login.html', {'msg': ''}))
+    
 
 main()
