@@ -7,7 +7,7 @@ cgitb.enable()
 import os
 from templates import render_template, redirect
 from date import get_today_short, get_today_long, get_day_str, get_day_info
-from auth import check_login
+from auth import check_login, get_id
 from user import get_name
 from schedules import get_schedules
 
@@ -16,11 +16,7 @@ def main():
         print(redirect('login.py'))
         return
 
-    id = ''
-    cookies = os.environ['HTTP_COOKIE'].split(';')
-    for cookie in cookies:
-            if cookie.split('=')[0] == 'token':
-                id = cookie.split('=')[1]
+    id = get_id()
 
     day_info = get_day_info(get_today_short())
     if day_info is not None:

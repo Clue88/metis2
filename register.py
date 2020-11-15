@@ -5,8 +5,13 @@ import cgi, cgitb
 cgitb.enable()
 
 from templates import render_template
+from schedules import period_forms
+from config import *
 
 def main():
-    print(render_template('register.html'))
+    replacements = {
+        'periods': period_forms(NUM_PERIODS)
+    }
+    print(render_template('register.html', replacements))
 
 main()

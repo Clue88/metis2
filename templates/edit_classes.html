@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Edit Classes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
+        <link rel='apple-touch-icon' href='static/favicon.ico' />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
+        <script>
+            function errMsg(name, msg) {
+                document.getElementById(name).innerHTML = msg;
+                document.forms[0][name].classList.add("is-danger");
+                document.getElementById(name).classList.add("is-danger");
+            }
+
+            function validateForm() {
+                good = true;
+                let form = document.forms[0];
+                let errs = document.getElementsByClassName("is-danger");
+                while (errs[0]) {
+                    errs[0].innerHTML = "";
+                    errs[0].classList.remove("is-danger");
+                }
+
+                for (i = 1; i <= 10; i++) {
+                    if (form["p"+i+"a"].value === "") {
+                        errMsg("p"+i+"a", "Please enter a value. You can enter \"Free Period\" if you don't have a class here.");
+                        good = false;
+                    }
+                }
+                return good;
+            }
+        </script>
+    </head>
+    <body style="margin:15px">
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <p class="title">Edit Classes</p>
+                    <a class="help has-text-link" href="index.py">Return to Home</a>
+                </article>
+            </div>
+        </div>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child notification is-light">
+                    <form method="GET" action="form_edit_classes.py" onsubmit="return validateForm()">
+                        <div class="field">
+                            <label class="label">Classes</label>
+                            <div class="control">
+                                <p class="help">You'll now input all of your classes so you can have a consolidated schedule with all of your Zoom links. Feel free to leave any spaces blank where you don't have information. If you have the same class on both A and B days, you can leave the B day slot blank.</p>
+                                $periods
+                            </div>
+                        </div>
+    
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <input class="input button is-primary" type="submit" value="Save">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

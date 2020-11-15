@@ -6,3 +6,4 @@ TZ_OFFSET = os.environ.get('TZ_OFFSET') or -5
 SCHEDULE_PATH = os.environ.get('SCHEDULE_PATH') or 'stuyfall20.csv'
 SCHEDULE_TIMES = os.environ.get('SCHEDULE_TIMES') or 'stuyfall20times.csv'
 USERS_DB = os.environ.get('USERS_DB') or 'users.db'
+NUM_PERIODS = os.environ.get('NUM_PERIODS') or 10

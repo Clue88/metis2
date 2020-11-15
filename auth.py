@@ -19,3 +19,11 @@ def check_login():
             return False
     else:
         return False
+
+def get_id():
+    id = ''
+    cookies = os.environ['HTTP_COOKIE'].split(';')
+    for cookie in cookies:
+            if cookie.split('=')[0] == 'token':
+                id = cookie.split('=')[1]
+    return id

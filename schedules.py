@@ -39,3 +39,34 @@ def get_times(period):
         if line.split(',')[0] == str(period):
             return line.split(',')[1] + ' - ' + line.split(',')[2]
     return ''
+
+def period_forms(num):
+    out = ''
+    period_template = '''
+        <input class="input" type="text" name="p//pd//a" placeholder="Period //pd// Class Day A">
+        <p class="help" id=p//pd//a></p>
+        <input class="input" type="text" name="p//pd//za" placeholder="Period //pd// Zoom Link Day A">
+        <input class="input" type="text" name="p//pd//b" placeholder="Period //pd// Class Day B (if necessary)">
+        <input class="input" type="text" name="p//pd//zb" placeholder="Period //pd// Zoom Link Day B (if necessary)">
+        <br><br>
+    '''
+    for i in range(1, num+1):
+        out += period_template.replace('//pd//', str(i))
+    return out
+
+def period_forms_edit(num):
+    out = ''
+    period_template = '''
+        <input class="input" type="text" name="p//pd//a" placeholder="Period //pd// Class Day A" value="$p//pd//a">
+        <p class="help" id=p//pd//a></p>
+        <input class="input" type="text" name="p//pd//za" placeholder="Period //pd// Zoom Link Day A" value="$p//pd//za">
+        <input class="input" type="text" name="p//pd//b" placeholder="Period //pd// Class Day B (if necessary)" value="$p//pd//b">
+        <input class="input" type="text" name="p//pd//zb" placeholder="Period //pd// Zoom Link Day B (if necessary)" value="$p//pd//zb">
+        <br><br>
+    '''
+    for i in range(1, num+1):
+        out += period_template.replace('//pd//', str(i))
+    return out
+
+def get_schedule_data(id):
+    return df.loc[id]
