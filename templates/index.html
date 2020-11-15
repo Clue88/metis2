@@ -11,10 +11,17 @@
     </head>
     <body style="margin:15px">
         <div class="tile is-ancestor">
-            <div class="tile is-parent">
+            <div class="tile is-parent is-9">
                 <article class="tile is-child box">
                     <p class="title">Hello, $username!</p>
                     <p class="subtitle">Today is $date.</p>
+                </article>
+            </div>
+            <div class="tile is-parent is-3 has-text-centered">
+                <article class="tile is-child box">
+                    <button class="button is-light is-primary is-medium" onclick="window.location.href='new_hw.py'">Classes</button>
+                    <button class="button is-light is-info is-medium" onclick="window.location.href='new_hw.py'">Profile</button>
+                    <button class="button is-light is-danger is-medium" onclick="window.location.href='new_hw.py'">Logout</button>
                 </article>
             </div>
         </div>
