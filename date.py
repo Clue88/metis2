@@ -23,3 +23,15 @@ def get_day_str(date):
             return dl[1] + ' Day (' + dl[2] + '-' + dl[3] + ')'
 
     return 'No school today!'
+
+def get_day_info(date):
+    f = open(os.path.join('data', SCHEDULE_PATH))
+    s = f.read()
+    f.close()
+
+    for line in s.split('\n')[0:-1]:
+        if line.split(',')[0] == date:
+            dl = line.split(',')
+            return [dl[1], int(dl[2]), int(dl[3])]
+
+    return None
