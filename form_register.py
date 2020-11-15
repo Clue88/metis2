@@ -59,7 +59,7 @@ def main():
         'p10b': form.getvalue('p10b') or form.getvalue('p10a'),
         'p10zb': form.getvalue('p10zb') or form.getvalue('p10za') or '',
     }
-    
+
     df = pd.DataFrame(data=d)
     engine = create_engine('sqlite:///data/users.db', echo=False)
     df.to_sql('data/users.db', con=engine, index_label='ID', if_exists='append')

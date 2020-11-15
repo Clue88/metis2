@@ -7,6 +7,20 @@
         <link rel='apple-touch-icon' href='static/favicon.ico' />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+
+        <script>
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                var expires = "expires="+ d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+
+            function logout() {
+                setCookie("token", "", 1);
+                window.location.href="login.py";
+            }
+        </script>
     </head>
     <body style="margin:15px">
         <div class="tile is-ancestor">
@@ -18,9 +32,9 @@
             </div>
             <div class="tile is-parent is-3 has-text-centered">
                 <article class="tile is-child box">
-                    <button class="button is-light is-primary is-medium" onclick="window.location.href='new_hw.py'">Classes</button>
-                    <button class="button is-light is-info is-medium" onclick="window.location.href='new_hw.py'">Profile</button>
-                    <button class="button is-light is-danger is-medium" onclick="window.location.href='new_hw.py'">Logout</button>
+                    <button class="button is-light is-primary is-medium" onclick="window.location.href=''">Classes</button>
+                    <button class="button is-light is-info is-medium" onclick="window.location.href=''">Profile</button>
+                    <button class="button is-light is-danger is-medium" onclick="logout()">Logout</button>
                 </article>
             </div>
         </div>
