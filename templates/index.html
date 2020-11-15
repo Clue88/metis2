@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Metis</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
+        <link rel='apple-touch-icon' href='static/favicon.ico' />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    </head>
+    <body style="margin:15px">
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <p class="title">Hello, $username!</p>
+                    <p class="subtitle">Today is $date.</p>
+                </article>
+            </div>
+        </div>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent is-4">
+                <div class="tile is-child notification is-primary">
+                    <p class="title">$day</p>
+                    <div class="table-container">
+                        <table class="table is-striped is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Period</th>
+                                    <th>Time</th>
+                                    <th>Class</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                $schedule
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tile is-parent">
+                <div class="tile is-child notification is-info">
+                    <p class="title">Outstanding Assignments</p>
+                    <div class="table-container">
+                        <table class="table is-striped is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Assignment</th>
+                                    <th>Due</th>
+                                    <th>Submit</th>
+                                    <th>Edit</th>
+                                    <th>Done</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                $hw
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent is-8">
+                <div class="tile is-child notification is-danger">
+                    <p class="title">Upcoming Tests</p>
+                    <div class="table-container">
+                        <table class="table is-striped is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Test</th>
+                                    <th>Date</th>
+                                    <th>Edit</th>
+                                    <th>Done</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                $tests
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tile is-parent">
+                <div class="tile is-child notification is-light">
+                    <p class="title">Add New</p>
+                    <button class="button is-info is-large" onclick="window.location.href='new_hw.py'">Assignment</button>
+                    <button class="button is-danger is-large" onclick="window.location.href='new_test.py'">Test</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
