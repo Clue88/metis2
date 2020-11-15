@@ -19,7 +19,7 @@ def get_schedules(id, letter, start, end):
         _class = class_template
         _class = _class.replace('//period//', str(i))
 
-        if (df.loc[id]['p'+str(i)+'z'+letter.lower()] is not None):
+        if (df.loc[id]['p'+str(i)+'z'+letter.lower()] != ''):
             _class = _class.replace('//link//', df.loc[id]['p'+str(i)+'z'+letter.lower()])
         else:
             _class = _class.replace('<td><a href="//link//" target="_blank">//name//</a></td>', '<td>//name//</td>')

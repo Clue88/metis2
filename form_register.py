@@ -19,7 +19,7 @@ def main():
         'name': [form.getvalue('name')],
         'password': [sha3_224(form.getvalue('password').encode('utf-8')).hexdigest()],
         'p1a': form.getvalue('p1a'),
-        'p1za': form.getvalue('p(.)za') or '' or '',
+        'p1za': form.getvalue('p1za') or '',
         'p1b': form.getvalue('p1b') or form.getvalue('p1a'),
         'p1zb': form.getvalue('p1zb') or form.getvalue('p1za') or '',
         'p2a': form.getvalue('p2a'),
