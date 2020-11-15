@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' href='favicon.ico' type='image/x-icon'/>
+        <link rel='apple-touch-icon' href='../hugo.png' />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    </head>
+    <body style="margin:15px">
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <p class="title">Login</p>
+                    <p class="subtitle" style="color:red">Please login to access this page.</p>
+                </article>
+            </div>
+        </div>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child notification is-light">
+                    <form method="GET" action="">
+                        <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control">
+                                <input class="input" type="text" name="username">
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" name="password">
+                            </div>
+                        </div>
+    
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <input class="input button is-link" type="submit" value="Login">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child has-text-link box">
+                    <a href="">New user? Register here.</a>
+                </article>
+            </div>
+        </div>
+    </body>
+</html>
