@@ -1,12 +1,13 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine
+from config import *
 
 def check_login():
     if 'HTTP_COOKIE' in os.environ:
         cookies = os.environ['HTTP_COOKIE'].split(';')
-        engine = create_engine('sqlite:///data/users.db', echo=False)
-        df = pd.read_sql('data/users.db', con=engine, index_col='user_id')
+        engine = create_engine('sqlite:///data/' + USERS_DB, echo=False)
+        df = pd.read_sql('data/' + USERS_DB, con=engine, index_col='user_id')
 
         id = ''
         for cookie in cookies:

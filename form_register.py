@@ -61,8 +61,8 @@ def main():
     }
 
     df = pd.DataFrame(data=d)
-    engine = create_engine('sqlite:///data/users.db', echo=False)
-    df.to_sql('data/users.db', con=engine, index_label='ID', if_exists='append')
+    engine = create_engine('sqlite:///data/' + USERS_DB, echo=False)
+    df.to_sql('data/' + USERS_DB, con=engine, index_label='ID', if_exists='append')
 
     print(redirect('login.py?login=success'))
 
