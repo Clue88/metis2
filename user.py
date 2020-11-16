@@ -10,3 +10,19 @@ def get_name(id):
 
 def get_email(id):
     return df.loc[id]['email']
+
+def get_classes(id):
+    out = ''
+    classes = remove_duplicates(df.loc[id].values.tolist()[4::2])
+    classes.remove('Free Period')
+    for _class in classes:
+        out += '<option>' + _class + '</option>'
+    return out
+
+
+def remove_duplicates(items):
+    out = []
+    for element in items:
+        if element not in out:
+            out.append(element)
+    return out
