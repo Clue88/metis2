@@ -7,3 +7,6 @@ df = pd.read_sql('data/' + USERS_DB, con=engine, index_col='user_id')
 
 def get_name(id):
     return df.loc[id]['name']
+
+def get_email(id):
+    return df.loc[id]['email']

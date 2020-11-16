@@ -18,6 +18,7 @@
                 good = true;
                 let form = document.forms[0];
                 let errs = document.getElementsByClassName("is-danger");
+                var existing_emails = $emails;
                 while (errs[0]) {
                     errs[0].innerHTML = "";
                     errs[0].classList.remove("is-danger");
@@ -25,6 +26,10 @@
 
                 if (!/(.)\w+([@])\w+([.])\w+/g.test(form['email'].value)) {
                     errMsg("email", "Please enter a valid email address.");
+                    good = false;
+                }
+                if (existing_emails.includes(form['email'].value)) {
+                    errMsg("email", "This email address already exists. Please enter a different email.");
                     good = false;
                 }
                 if (form['name'].value === "") {
