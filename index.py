@@ -8,7 +8,7 @@ import os
 from templates import render_template, redirect
 from date import get_today_short, get_today_long, get_day_str, get_day_info
 from auth import check_login, get_id
-from user import get_name
+from user import get_name, get_hw
 from schedules import get_schedules
 
 def main():
@@ -28,7 +28,8 @@ def main():
         'username': get_name(id),
         'date': get_today_long(),
         'day': get_day_str(get_today_short()),
-        'schedule': schedule
+        'schedule': schedule,
+        'hw': get_hw(id)
     }
 
     print(render_template('index.html', replacements))
