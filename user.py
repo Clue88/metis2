@@ -17,7 +17,8 @@ def get_email(id):
 def get_classes(id):
     out = ''
     classes = remove_duplicates(df.loc[id].values.tolist()[4::2])
-    classes.remove('Free Period')
+    if 'Free Period' in classes:
+        classes.remove('Free Period')
     for _class in classes:
         out += '<option>' + _class + '</option>'
     return out
@@ -61,12 +62,21 @@ def get_hw(id):
     entries = ''
     hw_rows = []
 
-    user_hw = hw_df.loc[id]
-    user_hw_outstanding = user_hw[user_hw.done.eq(False)]
+    if id not in hw_df.index.tolist():
+        return ''
 
-    for row in user_hw_outstanding.iterrows():
-        hw_rows.append(row[1])
-
+    is_outstanding = hw_df['done'] != True
+    user_hw = hw_df[is_outstanding].loc[id]
+    
+    if type(user_hw) == pd.core.series.Series:
+        if user_hw.done == False:
+            hw_rows.append(user_hw)
+    else:
+        for row in user_hw.iterrows():
+            if row[1].done == True:
+                continue
+            hw_rows.append(row[1])
+            
     hw_rows.sort(key=sortFunc)
 
     for row in hw_rows:
