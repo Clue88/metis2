@@ -18,7 +18,7 @@ def main():
     
     db.loc[get_id(), 'name'] = form.getvalue('name')
 
-    db.to_sql('data/users.db', con=engine, if_exists='replace')
+    db.to_sql('data/' + USERS_DB, con=engine, if_exists='replace')
 
     print(redirect('index.py'))
 

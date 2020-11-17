@@ -2,6 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from config import *
 from datetime import datetime
+from date import unformat_date
 
 engine = create_engine('sqlite:///data/' + USERS_DB, echo=False)
 df = pd.read_sql('data/' + USERS_DB, con=engine, index_col='user_id')
@@ -95,3 +96,14 @@ def get_hw(id):
         entries += entry
 
     return entries
+
+def get_hw_info(hw_id):
+    hw = hw_df.loc[hw_df['hw_id'] == hw_id]
+    info = {
+        'old_subject': hw.loc[:,'subject'].tolist()[0],
+        'old_assignment': hw.loc[:,'assignment'].tolist()[0],
+        'old_due': unformat_date(hw.loc[:,'due'].tolist()[0]),
+        'old_submit': hw.loc[:,'submit'].tolist()[0],
+        'old_link': hw.loc[:,'link'].tolist()[0]
+    }
+    return info
