@@ -8,6 +8,8 @@ engine = create_engine('sqlite:///data/' + USERS_DB, echo=False)
 df = pd.read_sql('data/' + USERS_DB, con=engine, index_col='user_id')
 hw_engine = create_engine('sqlite:///data/' + HW_DB, echo=False)
 hw_df = pd.read_sql('data/' + HW_DB, con=hw_engine, index_col='user_id')
+test_engine = create_engine('sqlite:///data/' + TEST_DB, echo=False)
+test_df = pd.read_sql('data/' + TEST_DB, con=test_engine, index_col='user_id')
 
 def get_name(id):
     return df.loc[id]['name']
@@ -63,7 +65,7 @@ def get_hw(id):
     entries = ''
     hw_rows = []
 
-    if id not in hw_df.index.tolist():
+    if id not in hw_df[hw_df['done'] == False].index.tolist():
         return ''
 
     is_outstanding = hw_df['done'] != True
@@ -105,5 +107,65 @@ def get_hw_info(hw_id):
         'old_due': unformat_date(hw.loc[:,'due'].tolist()[0]),
         'old_submit': hw.loc[:,'submit'].tolist()[0],
         'old_link': hw.loc[:,'link'].tolist()[0]
+    }
+    return info
+
+def get_tests(id):
+    test_template = '''
+        <tr>
+            <td>// class //</td>
+            <td>// test //</td>
+            <td>// date //</td>
+            <td>
+                <form method="GET" action="edit_test.py">
+                    <input type="hidden" name="id" value="// id //">
+                    <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                </form>
+            </td>
+            <td>
+                <form method="GET" action="complete_test.py">
+                    <input type="hidden" name="id" value="// id //">
+                    <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                </form>
+            </td>
+        </tr>
+    '''
+
+    entries = ''
+    test_rows = []
+
+    if id not in test_df[test_df['done'] == False].index.tolist():
+        return ''
+
+    is_outstanding = test_df['done'] != True
+    user_test = test_df[is_outstanding].loc[id]
+    
+    if type(user_test) == pd.core.series.Series:
+        if user_test.done == False:
+            test_rows.append(user_test)
+    else:
+        for row in user_test.iterrows():
+            if row[1].done == True:
+                continue
+            test_rows.append(row[1])
+            
+    test_rows.sort(key=sortFunc)
+
+    for row in test_rows:
+        entry = test_template.replace('// class //', row.subject)
+        entry = entry.replace('// test //', row.test)
+        entry = entry.replace('// date //', row.due)
+        entry = entry.replace('// id //', row.test_id)
+        
+        entries += entry
+
+    return entries
+
+def get_test_info(test_id):
+    test = test_df.loc[test_df['test_id'] == test_id]
+    info = {
+        'old_subject': test.loc[:,'subject'].tolist()[0],
+        'old_test': test.loc[:,'test'].tolist()[0],
+        'old_due': unformat_date(test.loc[:,'due'].tolist()[0])
     }
     return info

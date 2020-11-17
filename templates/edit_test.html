@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>New Test</title>
+        <title>Edit Test</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
-        <link rel='apple-touch-icon' href='static/favicon.ico' />
+        <link rel='icon' href='favicon.ico' type='image/x-icon'/>
+        <link rel='apple-touch-icon' href='../hugo.png' />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
+        <script defer>
+            function setSubject() {
+                document.getElementById("subject").value = "$old_subject";
+            }
+        </script>
     </head>
-    <body style="margin:15px">
+    <body style="margin:15px" onload="setSubject()">
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <article class="tile is-child box">
-                    <p class="title">New Test</p>
-                    <a class="help has-text-link" href="index.py">Return to Home</a>
+                    <p class="title">Edit Test</p>
                 </article>
             </div>
         </div>
@@ -20,12 +25,12 @@
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <div class="tile is-child notification is-light">
-                    <form method="GET" action="form_new_test.py">
+                    <form method="GET" action="form_edit_test.py">
                         <div class="field">
                             <label class="label">Class</label>
                             <div class="control">
                                 <div class="select">
-                                    <select name="subject">
+                                    <select name="subject" id="subject">
                                         $classes
                                     </select>
                                 </div>
@@ -35,19 +40,20 @@
                         <div class="field">
                             <label class="label">Test</label>
                             <div class="control">
-                                <input class="input" type="text" name="test" placeholder="Test #1">
+                                <input class="input" type="text" name="test" value="$old_test">
                             </div>
                         </div>
     
                         <div class="field">
                             <label class="label">Test Date</label>
                             <div class="control">
-                                <input class="input" type="date" name="due">
+                                <input class="input" type="date" name="due" value="$old_due">
                             </div>
                         </div>
                         
                         <div class="field is-grouped">
                             <div class="control">
+                                <input type="hidden" name="test_id" value="$test_id">
                                 <input class="input button is-link" type="submit" value="Submit">
                             </div>
                         </div>

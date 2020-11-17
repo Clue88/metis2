@@ -8,3 +8,4 @@ SCHEDULE_TIMES = os.environ.get('SCHEDULE_TIMES') or 'stuyfall20times.csv'
 USERS_DB = os.environ.get('USERS_DB') or 'users.db'
 NUM_PERIODS = os.environ.get('NUM_PERIODS') or 10
 HW_DB = os.environ.get('HW_DB') or 'hw.db'
+TEST_DB = os.environ.get('TEST_DB') or 'test.db'
