@@ -5,7 +5,7 @@ from config import *
 
 def check_login():
     if 'HTTP_COOKIE' in os.environ:
-        cookies = os.environ['HTTP_COOKIE'].split(';')
+        cookies = os.environ['HTTP_COOKIE'].split('; ')
         engine = create_engine('sqlite:///data/' + USERS_DB, echo=False)
         df = pd.read_sql('data/' + USERS_DB, con=engine, index_col='user_id')
 
@@ -22,7 +22,7 @@ def check_login():
 
 def get_id():
     id = ''
-    cookies = os.environ['HTTP_COOKIE'].split(';')
+    cookies = os.environ['HTTP_COOKIE'].split('; ')
     for cookie in cookies:
             if cookie.split('=')[0] == 'token':
                 id = cookie.split('=')[1]
