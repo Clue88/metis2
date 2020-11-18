@@ -17,7 +17,7 @@ def main():
         'classes': get_classes(get_id()),
         'hw_id': hw_id
     }
-    replacements = replacements|get_hw_info(hw_id)
+    replacements.update(get_hw_info(hw_id))
 
     print(render_template('edit_hw.html', replacements))
 

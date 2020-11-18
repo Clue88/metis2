@@ -17,7 +17,7 @@ def main():
         'classes': get_classes(get_id()),
         'test_id': test_id
     }
-    replacements = replacements|get_test_info(test_id)
+    replacements.update(get_test_info(test_id))
 
     print(render_template('edit_test.html', replacements))
 
