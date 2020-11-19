@@ -6,6 +6,23 @@
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
         <link rel='apple-touch-icon' href='static/favicon.ico' />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
+        <script defer>
+            var isDateSupported = function () {
+                var input = document.createElement('input');
+                var value = 'a';
+                input.setAttribute('type', 'date');
+                input.setAttribute('value', value);
+                return (input.value !== value);
+            };
+
+            function main() {
+                if (!isDateSupported) {
+                    document.getElementById("due").placeholder = "yyyy-mm-dd";
+                    document.getElementById("due_help").innerHTML = "Your browser does not support some functionality. Consider using another browser to use Metis.";
+                }
+            }
+        </script>
     </head>
     <body style="margin:15px">
         <div class="tile is-ancestor">
@@ -42,7 +59,8 @@
                         <div class="field">
                             <label class="label">Test Date</label>
                             <div class="control">
-                                <input class="input" type="date" name="due">
+                                <p class="help" id="due_help"></p>
+                                <input class="input" type="date" name="due" id="due">
                             </div>
                         </div>
                         
