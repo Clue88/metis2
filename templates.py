@@ -5,7 +5,7 @@ from config import *
 template_dir = TEMPLATE_DIR
 copyright = '''
 <footer>
-    <p class="has-text-centered"><small>Copyright &copy; 2020 Christopher Liu. All rights reserved.</small></p>
+    <p class="has-text-centered has-text-grey-light"><small>Copyright &copy; 2020 Christopher Liu. All rights reserved.</small></p>
 </footer>
 '''
 
