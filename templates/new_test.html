@@ -17,7 +17,7 @@
             };
 
             function main() {
-                if (!isDateSupported) {
+                if (!isDateSupported()) {
                     document.getElementById("due").placeholder = "yyyy-mm-dd";
                     document.getElementById("due_help").innerHTML = "Your browser does not support some functionality. Consider using another browser to use Metis.";
                 }
