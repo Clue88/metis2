@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Christopher Liu
+
 from datetime import date, datetime, timezone, timedelta
 from config import *
 import os

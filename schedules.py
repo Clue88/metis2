@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Christopher Liu
+
 import os
 import pandas as pd
 from sqlalchemy import create_engine

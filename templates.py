@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Christopher Liu
+
 import os
 from string import Template
 from config import *

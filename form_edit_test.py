@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Christopher Liu
+
 #! /usr/bin/python
 print('Content-type: text/html\n')
 

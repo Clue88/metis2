@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Christopher Liu
+
 import os
 
 TEMPLATE_DIR = os.environ.get('TEMPLATES') or 'templates'
