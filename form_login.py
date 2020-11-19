@@ -17,7 +17,7 @@ def main():
     
     engine = create_engine('sqlite:///data/' + USERS_DB, echo=False)
     df = pd.read_sql('data/' + USERS_DB, con=engine, index_col='email')
-    hashed = sha3_224((form.getvalue('password') or '').encode('utf-8')).hexdigest()
+    hashed = form.getvalue('password_hash') or ''
 
     if form.getvalue('email') in get_existing_emails():
         if df.loc[form.getvalue('email')]['password'] == hashed:

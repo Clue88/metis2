@@ -17,7 +17,7 @@ def main():
         'user_id': [uuid4().hex],
         'email': [form.getvalue('email')],
         'name': [form.getvalue('name')],
-        'password': [sha3_224(form.getvalue('password').encode('utf-8')).hexdigest()],
+        'password': [form.getvalue('password_hash')],
         'p1a': form.getvalue('p1a'),
         'p1za': form.getvalue('p1za') or '',
         'p1b': form.getvalue('p1b') or form.getvalue('p1a'),

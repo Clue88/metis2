@@ -6,6 +6,15 @@
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
         <link rel='apple-touch-icon' href='static/favicon.ico' />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
+        <script src="lib/sha3.min.js" defer></script>
+
+        <script>
+            function main() {
+                document.getElementById("password_hash").value = sha3_224(document.getElementById("password_raw").value);
+                document.getElementById("password_raw").value = "";
+            }
+        </script>
     </head>
     <body style="margin:15px">
         <div class="tile is-ancestor">
@@ -20,7 +29,7 @@
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <div class="tile is-child notification is-light">
-                    <form method="GET" action="form_login.py">
+                    <form method="GET" action="form_login.py" onsubmit="main()">
                         <div class="field">
                             <label class="label">Email</label>
                             <div class="control">
@@ -31,12 +40,13 @@
                         <div class="field">
                             <label class="label">Password</label>
                             <div class="control">
-                                <input class="input" type="password" name="password">
+                                <input class="input" type="password" name="password" id="password_raw">
                             </div>
                         </div>
     
                         <div class="field is-grouped">
                             <div class="control">
+                                <input type="hidden" name="password_hash" id="password_hash">
                                 <input class="input button is-link" type="submit" value="Login">
                             </div>
                         </div>

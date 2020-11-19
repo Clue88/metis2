@@ -7,6 +7,8 @@
         <link rel='apple-touch-icon' href='static/favicon.ico' />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 
+        <script src="lib/sha3.min.js" defer></script>
+
         <script>
             function errMsg(name, msg) {
                 document.getElementById(name).innerHTML = msg;
@@ -50,6 +52,10 @@
                         good = false;
                     }
                 }
+
+                document.getElementById("password_hash").value = sha3_224(document.getElementById("password_raw").value);
+                document.getElementById("password_raw").value = "";
+                document.getElementById("password_repeat").value = "";
                 return good;
             }
         </script>
@@ -91,7 +97,7 @@
                             <label class="label">Password</label>
                             <div class="control">
                                 <p class="help">Eight characters so you can have some semblence of cybersecurity.</p>
-                                <input class="input" type="password" name="password">
+                                <input class="input" type="password" name="password" id="password_raw">
                                 <p class="help" id="password"></p>
                             </div>
                         </div>
@@ -99,7 +105,7 @@
                         <div class="field">
                             <label class="label">Repeat Password</label>
                             <div class="control">
-                                <input class="input" type="password" name="repeat">
+                                <input class="input" type="password" name="repeat" id="password_repeat">
                                 <p class="help" id="repeat"></p>
                             </div>
                         </div>
@@ -114,6 +120,7 @@
     
                         <div class="field is-grouped">
                             <div class="control">
+                                <input type="hidden" name="password_hash" id="password_hash">
                                 <input class="input button is-link" type="submit" value="Register">
                             </div>
                         </div>
