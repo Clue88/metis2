@@ -6,7 +6,7 @@ import sys
 1. you should have the StuyTools.py file in the same directory as your Python file
 2. the top of your code should look like:
 
-#! /usr/bin/python
+#! /usr/bin/python3
 
 import StuyTools
 StuyTools.PWS_startup()

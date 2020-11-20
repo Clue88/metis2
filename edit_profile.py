@@ -1,6 +1,6 @@
 # Copyright (c) 2020 Christopher Liu
 
-#! /usr/bin/python
+#! /usr/bin/python3
 print('Content-type: text/html\n')
 
 import cgi, cgitb
