@@ -19,9 +19,9 @@ def main():
     db = pd.read_sql('data/' + TEST_DB, con=engine, index_col='test_id')
     test_id = form.getvalue('test_id')
     
-    db.loc[test_id, 'subject'] = form.getvalue('subject')
-    db.loc[test_id, 'test'] = form.getvalue('test')
-    db.loc[test_id, 'due'] = format_date(form.getvalue('due'))
+    db.loc[test_id, 'subject'] = form.getvalue('subject') or 'N/A'
+    db.loc[test_id, 'test'] = form.getvalue('test') or 'N/A'
+    db.loc[test_id, 'due'] = format_date(form.getvalue('due')) or 'Mon 9/28/20'
 
     db.to_sql('data/' + TEST_DB, con=engine, if_exists='replace')
 

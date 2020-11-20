@@ -19,11 +19,11 @@ def main():
     db = pd.read_sql('data/' + HW_DB, con=engine, index_col='hw_id')
     hw_id = form.getvalue('hw_id')
     
-    db.loc[hw_id, 'subject'] = form.getvalue('subject')
-    db.loc[hw_id, 'assignment'] = form.getvalue('assignment')
-    db.loc[hw_id, 'due'] = format_date(form.getvalue('due'))
-    db.loc[hw_id, 'submit'] = form.getvalue('submit')
-    db.loc[hw_id, 'link'] = form.getvalue('link')
+    db.loc[hw_id, 'subject'] = form.getvalue('subject') or 'N/A'
+    db.loc[hw_id, 'assignment'] = form.getvalue('assignment') or 'N/A'
+    db.loc[hw_id, 'due'] = format_date(form.getvalue('due')) or 'Mon 9/28/20'
+    db.loc[hw_id, 'submit'] = form.getvalue('submit') or 'N/A'
+    db.loc[hw_id, 'link'] = form.getvalue('link') or ''
 
     db.to_sql('data/' + HW_DB, con=engine, if_exists='replace')
 
