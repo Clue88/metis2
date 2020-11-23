@@ -45,7 +45,7 @@ def get_times(period):
 def period_forms(num):
     out = ''
     period_template = '''
-        <input class="input" type="text" name="p//pd//a" placeholder="Period //pd// Class Day A">
+        <input class="input" type="text" name="p//pd//a" placeholder="Period //pd// Class Day A" value="Free Period">
         <p class="help" id=p//pd//a></p>
         <input class="input" type="text" name="p//pd//za" placeholder="Period //pd// Zoom Link Day A">
         <input class="input" type="text" name="p//pd//b" placeholder="Period //pd// Class Day B (if necessary)">
