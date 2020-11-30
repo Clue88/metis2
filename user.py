@@ -105,9 +105,9 @@ def get_hw_info(hw_id):
     hw = hw_df.loc[hw_df['hw_id'] == hw_id]
     info = {
         'old_subject': hw.loc[:,'subject'].tolist()[0],
-        'old_assignment': hw.loc[:,'assignment'].tolist()[0],
+        'old_assignment': hw.loc[:,'assignment'].tolist()[0].replace('"', '\\"'),
         'old_due': unformat_date(hw.loc[:,'due'].tolist()[0]),
-        'old_submit': hw.loc[:,'submit'].tolist()[0],
+        'old_submit': hw.loc[:,'submit'].tolist()[0].replace('"', '\\"'),
         'old_link': hw.loc[:,'link'].tolist()[0]
     }
     return info
@@ -167,7 +167,7 @@ def get_test_info(test_id):
     test = test_df.loc[test_df['test_id'] == test_id]
     info = {
         'old_subject': test.loc[:,'subject'].tolist()[0],
-        'old_test': test.loc[:,'test'].tolist()[0],
+        'old_test': test.loc[:,'test'].tolist()[0].replace('"', '\\"'),
         'old_due': unformat_date(test.loc[:,'due'].tolist()[0])
     }
     return info

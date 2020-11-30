@@ -10,6 +10,7 @@
         <script defer>
             function setSubject() {
                 document.getElementById("subject").value = "$old_subject";
+                document.getElementById("test").value = "$old_test";
             }
         </script>
     </head>
@@ -41,7 +42,7 @@
                         <div class="field">
                             <label class="label">Test</label>
                             <div class="control">
-                                <input class="input" type="text" name="test" value="$old_test">
+                                <input class="input" type="text" name="test" id="test">
                             </div>
                         </div>
     
