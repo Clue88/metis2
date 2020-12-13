@@ -30,7 +30,7 @@
             <div class="tile is-parent is-9">
                 <article class="tile is-child box">
                     <p class="title">Hello, {{ user.username }}!</p>
-                    <p class="subtitle">Today is $date.</p>
+                    <p class="subtitle">Today is {{ date }}.</p>
                 </article>
             </div>
             <div class="tile is-parent is-3 has-text-centered">
@@ -45,7 +45,7 @@
         <div class="tile is-ancestor">
             <div class="tile is-parent is-4">
                 <div class="tile is-child notification is-primary">
-                    <p class="title">$day</p>
+                    <p class="title">{{ day }}</p>
                     <div class="table-container">
                         <table class="table is-striped is-hoverable is-fullwidth">
                             <thead>
@@ -56,7 +56,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                $schedule
+                                {% for subject in schedule %}
+                                <tr>
+                                    <th>{{ subject.period }}</th>
+                                    <td>{{ subject.times }}</td>
+                                    <td>{{ subject.subject }}</td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -78,7 +84,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                $hw
+                                {% for homework in homeworks %}
+                                <tr>
+                                    <td>{{ homework.subject }}</td>
+                                    <td>{{ homework.name }}</td>
+                                    <td>{{ homework.due }}</td>
+                                    <td>{{ homework.submit }}</td>
+                                    <td>
+                                        <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                    <td>
+                                        <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -102,7 +121,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                $tests
+                                {% for test in tests %}
+                                <tr>
+                                    <td>{{ test.subject }}</td>
+                                    <td>{{ test.name }}</td>
+                                    <td>{{ test.due }}</td>
+                                    <td>
+                                        <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                    <td>
+                                        <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
