@@ -1,151 +1,125 @@
-<html lang="en">
-    <head>
-        {% if title %}
-        <title>Metis - {{ title }}</title>
-        {% else %}
-        <title>Metis</title>
-        {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
-        <link rel='apple-touch-icon' href='static/favicon.ico' />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+{% extends "base.html" %}
 
-        <script>
-            function setCookie(cname, cvalue, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() + (exdays*24*60*60*1000));
-                var expires = "expires="+ d.toUTCString();
-                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-            }
-
-            function logout() {
-                setCookie("token", "", 1);
-                window.location.href="login.py";
-            }
-        </script>
-    </head>
-    <body style="margin:15px">
-        <div class="tile is-ancestor">
-            <div class="tile is-parent is-9">
-                <article class="tile is-child box">
-                    <p class="title">Hello, {{ user.username }}!</p>
-                    <p class="subtitle">Today is {{ date }}.</p>
-                </article>
-            </div>
-            <div class="tile is-parent is-3 has-text-centered">
-                <article class="tile is-child box">
-                    <button class="button is-light is-primary is-medium" onclick="window.location.href='edit_classes.py'">Classes</button>
-                    <button class="button is-light is-info is-medium" onclick="window.location.href='edit_profile.py'">Profile</button>
-                    <button class="button is-light is-danger is-medium" onclick="logout()">Logout</button>
-                </article>
-            </div>
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-9">
+            <article class="tile is-child box">
+                <p class="title">Hello, {{ user.username }}!</p>
+                <p class="subtitle">Today is {{ date }}.</p>
+            </article>
         </div>
+        <div class="tile is-parent is-3 has-text-centered">
+            <article class="tile is-child box">
+                <button class="button is-light is-primary is-medium" onclick="window.location.href='edit_classes.py'">Classes</button>
+                <button class="button is-light is-info is-medium" onclick="window.location.href='edit_profile.py'">Profile</button>
+                <button class="button is-light is-danger is-medium" onclick="logout()">Logout</button>
+            </article>
+        </div>
+    </div>
 
-        <div class="tile is-ancestor">
-            <div class="tile is-parent is-4">
-                <div class="tile is-child notification is-primary">
-                    <p class="title">{{ day }}</p>
-                    <div class="table-container">
-                        <table class="table is-striped is-hoverable is-fullwidth">
-                            <thead>
-                                <tr>
-                                    <th>Period</th>
-                                    <th>Time</th>
-                                    <th>Class</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for subject in schedule %}
-                                <tr>
-                                    <th>{{ subject.period }}</th>
-                                    <td>{{ subject.times }}</td>
-                                    <td>{{ subject.subject }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="tile is-parent">
-                <div class="tile is-child notification is-info">
-                    <p class="title">Outstanding Assignments</p>
-                    <div class="table-container">
-                        <table class="table is-striped is-hoverable is-fullwidth">
-                            <thead>
-                                <tr>
-                                    <th>Class</th>
-                                    <th>Assignment</th>
-                                    <th>Due</th>
-                                    <th>Submit</th>
-                                    <th>Edit</th>
-                                    <th>Done</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for homework in homeworks %}
-                                <tr>
-                                    <td>{{ homework.subject }}</td>
-                                    <td>{{ homework.name }}</td>
-                                    <td>{{ homework.due }}</td>
-                                    <td>{{ homework.submit }}</td>
-                                    <td>
-                                        <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
-                                    </td>
-                                    <td>
-                                        <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-4">
+            <div class="tile is-child notification is-primary">
+                <p class="title">{{ day }}</p>
+                <div class="table-container">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Time</th>
+                                <th>Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subject in schedule %}
+                            <tr>
+                                <th>{{ subject.period }}</th>
+                                <td>{{ subject.times }}</td>
+                                <td>{{ subject.subject }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
-        <div class="tile is-ancestor">
-            <div class="tile is-parent is-8">
-                <div class="tile is-child notification is-danger">
-                    <p class="title">Upcoming Tests</p>
-                    <div class="table-container">
-                        <table class="table is-striped is-hoverable is-fullwidth">
-                            <thead>
-                                <tr>
-                                    <th>Class</th>
-                                    <th>Test</th>
-                                    <th>Date</th>
-                                    <th>Edit</th>
-                                    <th>Done</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for test in tests %}
-                                <tr>
-                                    <td>{{ test.subject }}</td>
-                                    <td>{{ test.name }}</td>
-                                    <td>{{ test.due }}</td>
-                                    <td>
-                                        <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
-                                    </td>
-                                    <td>
-                                        <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="tile is-parent">
-                <div class="tile is-child notification is-light">
-                    <p class="title">Add New</p>
-                    <button class="button is-info is-large" onclick="window.location.href='new_hw.py'">Assignment</button>
-                    <button class="button is-danger is-large" onclick="window.location.href='new_test.py'">Test</button>
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-info">
+                <p class="title">Outstanding Assignments</p>
+                <div class="table-container">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Assignment</th>
+                                <th>Due</th>
+                                <th>Submit</th>
+                                <th>Edit</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for homework in homeworks %}
+                            <tr>
+                                <td>{{ homework.subject }}</td>
+                                <td>{{ homework.name }}</td>
+                                <td>{{ homework.due }}</td>
+                                <td>{{ homework.submit }}</td>
+                                <td>
+                                    <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                                </td>
+                                <td>
+                                    <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-8">
+            <div class="tile is-child notification is-danger">
+                <p class="title">Upcoming Tests</p>
+                <div class="table-container">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Test</th>
+                                <th>Date</th>
+                                <th>Edit</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for test in tests %}
+                            <tr>
+                                <td>{{ test.subject }}</td>
+                                <td>{{ test.name }}</td>
+                                <td>{{ test.due }}</td>
+                                <td>
+                                    <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                                </td>
+                                <td>
+                                    <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-light">
+                <p class="title">Add New</p>
+                <button class="button is-info is-large" onclick="window.location.href='new_hw.py'">Assignment</button>
+                <button class="button is-danger is-large" onclick="window.location.href='new_test.py'">Test</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+<html lang="en">
+    <head>
+        {% if title %}
+        <title>Metis - {{ title }}</title>
+        {% else %}
+        <title>Metis</title>
+        {% endif %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' href='static/favicon.ico' type='image/x-icon'/>
+        <link rel='apple-touch-icon' href='static/favicon.ico' />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+
+    </head>
+    <body style="margin:15px">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger is-light">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
