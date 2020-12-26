@@ -17,7 +17,11 @@
             <div class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item" href="{{ url_for('index') }}">Home</a>
+                    {% if current_user.is_anonymous %}
                     <a class="navbar-item" href="{{ url_for('login') }}">Login</a>
+                    {% else %}
+                    <a class="navbar-item" href="{{ url_for('logout') }}">Logout</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
