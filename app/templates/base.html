@@ -11,12 +11,53 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
+
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach( el => {
+                        el.addEventListener('click', () => {
+
+                        // Get the target from the "data-target" attribute
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+
+                        });
+                    });
+                }
+
+            });
+        </script>
+
     </head>
     <body style="margin:15px">
         <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
-            <div class="navbar-menu">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <img src="{{ url_for('static', filename='stuyvesant-logo.png') }}" width="100" height="32">
+                </a>
+            
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="navbar-menu" id="navMenu">
                 <div class="navbar-start">
                     <a class="navbar-item" href="{{ url_for('index') }}">Home</a>
+                </div>
+                <div class="navbar-end">
                     {% if current_user.is_anonymous %}
                     <a class="navbar-item" href="{{ url_for('login') }}">Login</a>
                     {% else %}
