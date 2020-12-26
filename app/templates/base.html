@@ -43,7 +43,7 @@
     <body style="margin:15px">
         <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="{{ url_for('index') }}">
+                <a class="navbar-item" href="{{ url_for('main.index') }}">
                     <img src="{{ url_for('static', filename='favicon.ico') }}" width="28" height="28">
                 </a>
             
@@ -58,9 +58,9 @@
                 </div>
                 <div class="navbar-end">
                     {% if current_user.is_anonymous %}
-                    <a class="navbar-item" href="{{ url_for('login') }}">Login</a>
+                    <a class="navbar-item" href="{{ url_for('auth.login') }}">Login</a>
                     {% else %}
-                    <a class="navbar-item" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="navbar-item" href="{{ url_for('auth.logout') }}">Logout</a>
                     {% endif %}
                 </div>
             </div>
