@@ -13,6 +13,14 @@
 
     </head>
     <body style="margin:15px">
+        <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="{{ url_for('index') }}">Home</a>
+                    <a class="navbar-item" href="{{ url_for('login') }}">Login</a>
+                </div>
+            </div>
+        </nav>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <div class="notification is-danger is-light">
