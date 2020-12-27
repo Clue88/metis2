@@ -4,38 +4,46 @@ from app import db
 from app.main import bp
 from app.main.forms import EditProfileForm, EditClassesForm
 from app.models import User
+import os
+from datetime import datetime
 
 @bp.route('/')
 @bp.route('/index')
 @login_required
 def index():
-    schedule = [
-        {
-            'period': 1,
-            'times': '9:10 AM - 10:05 AM',
-            'subject': current_user.period_6b
-        },
-        {
-            'period': 2,
-            'times': '10:15 AM - 11:10 AM',
-            'subject': current_user.period_2a
-        },
-        {
-            'period': 3,
-            'times': '11:20 AM - 12:15 PM',
-            'subject': current_user.period_3a
-        },
-        {
-            'period': 4,
-            'times': '12:25 PM - 1:20 PM',
-            'subject': current_user.period_4a
-        },
-        {
-            'period': 5,
-            'times': '1:30 PM - 2:25 PM',
-            'subject': current_user.period_5a
+    # now = datetime.now()
+    now = datetime(2021, 1, 12)
+    print(now.strftime('%m/%d/%Y'))
+
+    start = 0
+    end = -1
+    schedule_day = ''
+    with open(os.path.join(os.getcwd(), 'data/stuyfall20.csv')) as f:
+        lines = f.read().split('\n')
+        for line in lines:
+            if line.split(',')[0] == now.strftime('%-m/%-d/%-y'):
+                start = int(line.split(',')[2])
+                end = int(line.split(',')[3])
+                schedule_day = line.split(',')[1].lower()
+
+    times = []
+    with open(os.path.join(os.getcwd(), 'data/stuyfall20times.csv')) as f:
+        times = f.read().split('\n')
+
+    schedule = []
+    for i in range(start, end+1):
+        schedule_item = {
+            'period': i,
+            'times': times[i-1].split(',')[1] + ' - ' + times[i-1].split(',')[2],
+            'subject': current_user['period_' + str(i) + schedule_day],
+            'link': current_user['period_' + str(i) + schedule_day + '_zoom']
         }
-    ]
+        schedule.append(schedule_item)
+
+    if end == -1: day = 'No school today!'
+    else:
+        day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
+
     homeworks = [
         {
             'subject': 'AP US History',
@@ -59,7 +67,12 @@ def index():
             'due': 'Wed 12/16/20'
         }
     ]
-    return render_template('index.html', title='Home', date='Monday, December 14, 2020', day='Day A (1-5)', homeworks=homeworks, tests=tests, schedule=schedule)
+
+    date = now.strftime('%A, %B %-d, %Y')
+    
+    return render_template(
+        'index.html', title='Home', date=date, day=day, homeworks=homeworks,
+        tests=tests, schedule=schedule)
 
 @bp.route('/profile')
 @login_required

@@ -28,7 +28,11 @@
                             <tr>
                                 <th>{{ subject.period }}</th>
                                 <td>{{ subject.times }}</td>
+                                {% if subject.link %}
+                                <td><a href="{{ subject.link }}">{{ subject.subject }}</a></td>
+                                {% else %}
                                 <td>{{ subject.subject }}</td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>
