@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 from app import db
 from app.main import bp
-from app.main.forms import EditProfileForm
+from app.main.forms import EditProfileForm, EditClassesForm
 from app.models import User
 
 @bp.route('/')
@@ -67,9 +67,9 @@ def profile():
     periods = {}
     for i in range(1, 11):
         periods['Period ' + str(i) + ' (A)'] = 'period_' + str(i) + 'a'
-        periods['Period ' + str(i) + ' Zoom (A)'] = 'period_' + str(i) + 'a'
+        periods['Period ' + str(i) + ' Zoom (A)'] = 'period_' + str(i) + 'a_zoom'
         periods['Period ' + str(i) + ' (B)'] = 'period_' + str(i) + 'b'
-        periods['Period ' + str(i) + ' Zoom (B)'] = 'period_' + str(i) + 'b'
+        periods['Period ' + str(i) + ' Zoom (B)'] = 'period_' + str(i) + 'b_zoom'
 
     return render_template('profile.html', title='Profile', periods=periods)
 
@@ -92,6 +92,23 @@ def edit_profile():
 @bp.route('/edit_classes', methods=['GET', 'POST'])
 @login_required
 def edit_classes():
-    form = EditProfileForm(current_user.username, current_user.email)
+    form = EditClassesForm()
+    periods = []
+    for i in range(1, 11):
+        periods.append('period_' + str(i) + 'a')
+        periods.append('period_' + str(i) + 'a_zoom')
+        periods.append('period_' + str(i) + 'b')
+        periods.append('period_' + str(i) + 'b_zoom')
+
+    if form.validate_on_submit():
+        for field in periods:
+            current_user[field] = form[field].data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('main.profile'))
+    elif request.method == 'GET':
+        for field in periods:
+            if current_user[field] is not None:
+                form[field].data = current_user[field]
     return render_template(
-        'edit_profile.html', title='Edit Classes', form=form)
+        'edit_classes.html', title='Edit Classes', periods=periods, form=form)

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Edit Classes</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-light">
+                <form action="" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    {% for field in periods %}
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">{{ form[field].label }}</label>
+                            {{ form[field](class_='input') }}
+                            {% for error in form[field].errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            {{ form.submit(class_='input button is-primary') }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
