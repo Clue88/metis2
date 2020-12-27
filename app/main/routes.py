@@ -64,7 +64,14 @@ def index():
 @bp.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    periods = {}
+    for i in range(1, 11):
+        periods['Period ' + str(i) + ' (A)'] = 'period_' + str(i) + 'a'
+        periods['Period ' + str(i) + ' Zoom (A)'] = 'period_' + str(i) + 'a'
+        periods['Period ' + str(i) + ' (B)'] = 'period_' + str(i) + 'b'
+        periods['Period ' + str(i) + ' Zoom (B)'] = 'period_' + str(i) + 'b'
+
+    return render_template('profile.html', title='Profile', periods=periods)
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -81,3 +88,10 @@ def edit_profile():
         form.email.data = current_user.email
     return render_template(
         'edit_profile.html', title='Edit Profile', form=form)
+
+@bp.route('/edit_classes', methods=['GET', 'POST'])
+@login_required
+def edit_classes():
+    form = EditProfileForm(current_user.username, current_user.email)
+    return render_template(
+        'edit_profile.html', title='Edit Classes', form=form)

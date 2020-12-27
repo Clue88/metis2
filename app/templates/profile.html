@@ -19,4 +19,19 @@
             </article>
         </div>
     </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+                <a href="{{ url_for('main.edit_classes') }}">Edit Classes</a><br><br>
+                {% for label, field in periods.items() %}
+                <strong>{{ label }}: </strong>{{ current_user[field] }}<br>
+                {% if label.endswith('Zoom (B)') %}
+                <br>
+                {% endif %}
+                {% endfor %}
+                <a href="{{ url_for('main.edit_classes') }}">Edit Classes</a>
+            </article>
+        </div>
+    </div>
 {% endblock %}
