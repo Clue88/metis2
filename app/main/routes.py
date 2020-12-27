@@ -13,27 +13,27 @@ def index():
         {
             'period': 1,
             'times': '9:10 AM - 10:05 AM',
-            'subject': 'AP US History'
+            'subject': current_user.period_6b
         },
         {
             'period': 2,
             'times': '10:15 AM - 11:10 AM',
-            'subject': 'BC Calc'
+            'subject': current_user.period_2a
         },
         {
             'period': 3,
             'times': '11:20 AM - 12:15 PM',
-            'subject': 'BC Calc'
+            'subject': current_user.period_3a
         },
         {
             'period': 4,
             'times': '12:25 PM - 1:20 PM',
-            'subject': 'Free Period'
+            'subject': current_user.period_4a
         },
         {
             'period': 5,
             'times': '1:30 PM - 2:25 PM',
-            'subject': 'AP Spanish'
+            'subject': current_user.period_5a
         }
     ]
     homeworks = [
