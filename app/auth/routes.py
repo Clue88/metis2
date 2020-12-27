@@ -38,6 +38,6 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now registered! Please log in here.')
+        flash('Congratulations, you are now registered! Please log in here. You can configure your classes and links by clicking the "Profile" button after your log in.')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Register', form=form)

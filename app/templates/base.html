@@ -60,6 +60,7 @@
                     {% if current_user.is_anonymous %}
                     <a class="navbar-item" href="{{ url_for('auth.login') }}">Login</a>
                     {% else %}
+                    <a class="navbar-item" href="{{ url_for('main.profile') }}">Profile</a>
                     <a class="navbar-item" href="{{ url_for('auth.logout') }}">Logout</a>
                     {% endif %}
                 </div>

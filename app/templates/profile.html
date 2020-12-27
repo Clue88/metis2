@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Profile</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+                <strong>Username: </strong> {{ current_user.username }}<br>
+                <strong>Email: </strong> {{ current_user.email }}<br><br>
+                <a href="{{ url_for('main.edit_profile') }}">Edit Personal Info</a><br>
+                <a href="{{ url_for('main.profile') }}">Change Password</a>
+            </article>
+        </div>
+    </div>
+{% endblock %}
