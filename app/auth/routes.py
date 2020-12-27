@@ -55,4 +55,5 @@ def change_password():
         else:
             flash('Incorrect password.')
             return redirect(url_for('auth.change_password'))
-    return render_template('auth/change_password.html', form=form)
+    return render_template(
+        'auth/change_password.html', title='Change Password', form=form)

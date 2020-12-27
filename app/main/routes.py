@@ -103,10 +103,12 @@ def edit_classes():
     if form.validate_on_submit():
         for field in periods:
             current_user[field] = form[field].data
-            if field.endswith('b') and form[field[:-1] + 'a'].data is not None:
-                current_user[field] = form[field[:-1] + 'a'].data
-            if field.endswith('b_zoom') and form[field[:-6] + 'a_zoom'].data is not None:
-                current_user[field] = form[field[:-6] + 'a_zoom'].data
+            # If B Day info is None, replace with A Day info
+            if form[field].data is None:
+                if field.endswith('b') and form[field[:-1] + 'a'].data is not None:
+                    current_user[field] = form[field[:-1] + 'a'].data
+                if field.endswith('b_zoom') and form[field[:-6] + 'a_zoom'].data is not None:
+                    current_user[field] = form[field[:-6] + 'a_zoom'].data
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('main.profile'))
