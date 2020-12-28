@@ -60,8 +60,16 @@
                             <tr>
                                 <td>{{ homework.subject }}</td>
                                 <td>{{ homework.name }}</td>
-                                <td>{{ homework.due }}</td>
+                                <td>{{ homework.due_date.strftime('%a %-m/%-d/%-y') }}</td>
+                                {% if homework.submit %}
+                                {% if homework.link %}
+                                <td><a href="{{ homework.link }}" target="_blank">{{ homework.submit }}</a></td>
+                                {% else %}
                                 <td>{{ homework.submit }}</td>
+                                {% endif %}
+                                {% else %}
+                                <td>N/A</td>
+                                {% endif %}
                                 <td>
                                     <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
                                 </td>

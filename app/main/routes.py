@@ -42,22 +42,10 @@ def index():
     else:
         day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
 
-    homeworks = [
-        {
-            'subject': 'AP US History',
-            'name': 'Homework 5',
-            'due': 'Mon 12/14/20',
-            'submit': 'Google Classroom',
-            'link': 'https://classroom.google.com/u/0/c/MTU5ODM1MDAwMjc5/m/MTg1MTYxOTc1OTg2/details'
-        },
-        {
-            'subject': 'AP English',
-            'name': 'Read a Book',
-            'due': 'Tue 12/15/20',
-            'submit': 'Google Classroom',
-            'link': 'https://classroom.google.com/u/0/c/MTU5ODM1MDAwMjc5/m/MTg1MTYxOTc1OTg2/details'
-        }
-    ]
+    homeworks = Homework.query.filter(
+        Homework.user_id==3, Homework.done==False).order_by(Homework.due_date)
+
+    print(homeworks[1].due_date)
     tests = [
         {
             'subject': 'BC Calc',
