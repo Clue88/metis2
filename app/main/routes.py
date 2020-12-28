@@ -43,9 +43,8 @@ def index():
         day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
 
     homeworks = Homework.query.filter(
-        Homework.user_id==3, Homework.done==False).order_by(Homework.due_date)
+        Homework.user_id==current_user.id, Homework.done==False).order_by(Homework.due_date)
 
-    print(homeworks[1].due_date)
     tests = [
         {
             'subject': 'BC Calc',
