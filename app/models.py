@@ -84,6 +84,7 @@ class Homework(db.Model):
     name = db.Column(db.String(64))
     due_date = db.Column(db.DateTime, index=True, default=datetime(2020, 9, 28))
     submit = db.Column(db.String(64))
+    link = db.Column(db.String(512))
     done = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 

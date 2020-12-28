@@ -29,7 +29,7 @@
                                 <th>{{ subject.period }}</th>
                                 <td>{{ subject.times }}</td>
                                 {% if subject.link %}
-                                <td><a href="{{ subject.link }}">{{ subject.subject }}</a></td>
+                                <td><a href="{{ subject.link }}" target="_blank">{{ subject.subject }}</a></td>
                                 {% else %}
                                 <td>{{ subject.subject }}</td>
                                 {% endif %}
@@ -114,8 +114,8 @@
         <div class="tile is-parent">
             <div class="tile is-child notification is-light">
                 <p class="title">Add New</p>
-                <button class="button is-info is-large" onclick="window.location.href='new_hw.py'">Assignment</button>
-                <button class="button is-danger is-large" onclick="window.location.href='new_test.py'">Test</button>
+                <button class="button is-info is-large" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Assignment</button>
+                <button class="button is-danger is-large" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Test</button>
             </div>
         </div>
     </div>

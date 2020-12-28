@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email
 from app.models import User
 
@@ -77,3 +77,14 @@ class EditClassesForm(FlaskForm):
     period_10b_zoom = StringField('Period 10 Zoom (B)')
 
     submit = SubmitField('Save')
+
+class NewHomeworkForm(FlaskForm):
+    subject = SelectField('Subject', choices=[], validate_choice=False,
+        validators=[DataRequired()])
+    name = StringField('Assignment Name', validators=[DataRequired()])
+    # Due Date needs to be a StringField to allow for no date (empty string
+    # is not a valid date format)
+    due_date = StringField('Due Date')
+    submit_method = StringField('Submission Method')
+    link = StringField('Assignment Link')
+    submit = SubmitField('Add New Homework')

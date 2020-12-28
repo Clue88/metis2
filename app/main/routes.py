@@ -2,8 +2,8 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 from app import db
 from app.main import bp
-from app.main.forms import EditProfileForm, EditClassesForm
-from app.models import User
+from app.main.forms import EditProfileForm, EditClassesForm, NewHomeworkForm
+from app.models import User, Homework
 import os
 from datetime import datetime
 
@@ -11,9 +11,7 @@ from datetime import datetime
 @bp.route('/index')
 @login_required
 def index():
-    # now = datetime.now()
-    now = datetime(2021, 1, 12)
-    print(now.strftime('%m/%d/%Y'))
+    now = datetime.now()
 
     start = 0
     end = -1
@@ -131,3 +129,35 @@ def edit_classes():
                 form[field].data = current_user[field]
     return render_template(
         'edit_classes.html', title='Edit Classes', periods=periods, form=form)
+
+@bp.route('/new_homework', methods=['GET', 'POST'])
+@login_required
+def new_homework():
+    periods = []
+    for i in range(1, 11):
+        periods.append('period_' + str(i) + 'a')
+        periods.append('period_' + str(i) + 'b')
+
+    subjects = []
+    for field in periods:
+        if current_user[field] not in subjects and current_user[field] != 'Free Period':
+            subjects.append(current_user[field])
+    form = NewHomeworkForm()
+
+    # Workaround for no due date
+    if form.due_date.data == '': form.due_date.data = None
+
+    if form.validate_on_submit():
+        homework = Homework(
+            subject=form.subject.data,
+            name=form.name.data,
+            due_date=form.due_date.data,
+            submit=form.submit_method.data,
+            link=form.link.data,
+            user_id=current_user.id)
+        db.session.add(homework)
+        db.session.commit()
+        flash('Homework assignment added!')
+        return redirect(url_for('main.index'))
+    return render_template(
+        'new_homework.html', title='New Homework', form=form, subjects=subjects)
