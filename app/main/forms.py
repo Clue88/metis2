@@ -107,7 +107,7 @@ class NewTestForm(FlaskForm):
     # Due Date needs to be a StringField to allow for no date (empty string
     # is not a valid date format)
     due_date = StringField('Due Date')
-    submit = SubmitField('Add New Homework')
+    submit = SubmitField('Add New Test')
 
 class EditTestForm(FlaskForm):
     subject = SelectField('Subject', choices=[], validate_choice=False,
@@ -116,4 +116,4 @@ class EditTestForm(FlaskForm):
     # Due Date needs to be a StringField to allow for no date (empty string
     # is not a valid date format)
     due_date = StringField('Due Date')
-    submit = SubmitField('Save Homework')
+    submit = SubmitField('Save Test')
