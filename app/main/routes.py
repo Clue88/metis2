@@ -148,7 +148,7 @@ def new_homework():
 @bp.route('/edit_homework', methods=['GET', 'POST'])
 @login_required
 def edit_homework():
-    homework = Homework.query.filter(Homework.id == request.args.get('id')).first()
+    homework = Homework.query.filter(Homework.id == request.args.get('id'), Homework.done == False).first()
     if homework.user_id != current_user.id:
         return render_template('errors/500.html'), 500
     
@@ -226,7 +226,7 @@ def new_test():
 @bp.route('/edit_test', methods=['GET', 'POST'])
 @login_required
 def edit_test():
-    test = Test.query.filter(Test.id == request.args.get('id')).first()
+    test = Test.query.filter(Test.id == request.args.get('id'), Test.done == False).first()
     if test.user_id != current_user.id:
         return render_template('errors/500.html'), 500
     
