@@ -3,8 +3,8 @@ from flask_login import current_user, login_required
 from app import db
 from app.main import bp
 from app.main.forms import EditProfileForm, EditClassesForm, NewHomeworkForm, \
-    EditHomeworkForm
-from app.models import User, Homework
+    EditHomeworkForm, NewTestForm, EditTestForm
+from app.models import User, Homework, Test
 import os
 from datetime import datetime
 
@@ -46,13 +46,8 @@ def index():
     homeworks = Homework.query.filter(
         Homework.user_id==current_user.id, Homework.done==False).order_by(Homework.due_date)
 
-    tests = [
-        {
-            'subject': 'BC Calc',
-            'name': 'Group Test',
-            'due': 'Wed 12/16/20'
-        }
-    ]
+    tests = Test.query.filter(
+        Test.user_id==current_user.id, Test.done==False).order_by(Test.due_date)
 
     date = now.strftime('%A, %B %-d, %Y')
     
@@ -195,5 +190,79 @@ def complete_homework():
         return render_template('errors/500.html'), 500
 
     homework.done = True
+    db.session.commit()
+    return redirect(url_for('main.index'))
+
+@bp.route('/new_test', methods=['GET', 'POST'])
+@login_required
+def new_test():
+    periods = []
+    for i in range(1, 11):
+        periods.append('period_' + str(i) + 'a')
+        periods.append('period_' + str(i) + 'b')
+
+    subjects = []
+    for field in periods:
+        if current_user[field] not in subjects and current_user[field] != 'Free Period':
+            subjects.append(current_user[field])
+    form = NewTestForm()
+
+    # Workaround for no due date
+    if form.due_date.data == '': form.due_date.data = None
+
+    if form.validate_on_submit():
+        test = Test(
+            subject=form.subject.data,
+            name=form.name.data,
+            due_date=form.due_date.data,
+            user_id=current_user.id)
+        db.session.add(test)
+        db.session.commit()
+        flash('Test added!')
+        return redirect(url_for('main.index'))
+    return render_template(
+        'new_test.html', title='New Test', form=form, subjects=subjects)
+
+@bp.route('/edit_test', methods=['GET', 'POST'])
+@login_required
+def edit_test():
+    test = Test.query.filter(Test.id == request.args.get('id')).first()
+    if test.user_id != current_user.id:
+        return render_template('errors/500.html'), 500
+    
+    form = EditTestForm()
+    if form.validate_on_submit():
+        test.subject = form.subject.data
+        test.name = form.name.data
+        test.due_date = form.due_date.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('main.index'))
+    elif request.method == 'GET':
+        periods = []
+        for i in range(1, 11):
+            periods.append('period_' + str(i) + 'a')
+            periods.append('period_' + str(i) + 'b')
+
+        subjects = []
+        for field in periods:
+            if current_user[field] not in subjects and current_user[field] != 'Free Period':
+                subjects.append(current_user[field])
+
+        subject = test.subject
+        form.name.data = test.name
+        form.due_date.data = homework.due_date.strftime('%Y-%m-%d')
+    return render_template(
+        'edit_test.html', title='Edit Test', form=form,
+        subjects=subjects, subject=subject)
+
+@bp.route('/complete_test')
+@login_required
+def complete_test():
+    test = Test.query.filter(Test.id == request.args.get('id')).first()
+    if test.user_id != current_user.id:
+        return render_template('errors/500.html'), 500
+
+    test.done = True
     db.session.commit()
     return redirect(url_for('main.index'))

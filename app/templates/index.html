@@ -109,12 +109,16 @@
                             <tr>
                                 <td>{{ test.subject }}</td>
                                 <td>{{ test.name }}</td>
-                                <td>{{ test.due }}</td>
+                                <td>{{ test.due_date.strftime('%a %-m/%-d/%-y') }}</td>
                                 <td>
-                                    <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="button is-small is-info is-light" onclick="window.location.href='{{ url_for('main.edit_test') + '?id=' }}{{ test.id }}'">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
                                 </td>
                                 <td>
-                                    <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                                    <button class="button is-small is-success is-light" onclick="window.location.href='{{ url_for('main.complete_test') + '?id=' }}{{ test.id }}'">
+                                        <i class="fas fa-check"></i>
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -127,7 +131,7 @@
             <div class="tile is-child notification is-light">
                 <p class="title">Add New</p>
                 <button class="button is-info is-large" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Assignment</button>
-                <button class="button is-danger is-large" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Test</button>
+                <button class="button is-danger is-large" onclick="window.location.href='{{ url_for('main.new_test') }}'">Test</button>
             </div>
         </div>
     </div>
