@@ -266,3 +266,17 @@ def complete_test():
     test.done = True
     db.session.commit()
     return redirect(url_for('main.index'))
+
+@bp.route('/schedule/<username>')
+def schedule(username):
+    periods = []
+    for i in range(1, 11):
+        periods.append('period_' + str(i) + 'a')
+        periods.append('period_' + str(i) + 'b')
+
+    user = User.query.filter(User.username == username).first_or_404()
+    subjects = []
+    for field in periods:
+        subjects.append(user[field])
+
+    return render_template('schedule.html', title=username+'\'s Schedule', username=username, subjects=subjects)

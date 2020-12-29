@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{ username }}'s Schedule</p>
+                <p>
+                    This is a public link - if you'd like to share your
+                    schedule with others, you can just send them to this page.
+                </p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+                <p class="title">Day A</p>
+                {% for i in range(1, 21, 2) %}
+                <strong>Period {{ (i + 1) // 2 }}: </strong>{{ subjects[i-1] }}<br>
+                {% endfor %}
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+                <p class="title">Day B</p>
+                {% for i in range(2, 21, 2) %}
+                <strong>Period {{ i // 2 }}: </strong>{{ subjects[i-1] }}<br>
+                {% endfor %}
+            </article>
+        </div>
+    </div>
+{% endblock %}
