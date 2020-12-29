@@ -251,7 +251,7 @@ def edit_test():
 
         subject = test.subject
         form.name.data = test.name
-        form.due_date.data = homework.due_date.strftime('%Y-%m-%d')
+        form.due_date.data = test.due_date.strftime('%Y-%m-%d')
     return render_template(
         'edit_test.html', title='Edit Test', form=form,
         subjects=subjects, subject=subject)
