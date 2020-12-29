@@ -187,3 +187,13 @@ def edit_homework():
         'edit_homework.html', title='Edit Homework', form=form,
         subjects=subjects, subject=subject)
     
+@bp.route('/complete_homework')
+@login_required
+def complete_homework():
+    homework = Homework.query.filter(Homework.id == request.args.get('id')).first()
+    if homework.user_id != current_user.id:
+        return render_template('errors/500.html'), 500
+
+    homework.done = True
+    db.session.commit()
+    return redirect(url_for('main.index'))
