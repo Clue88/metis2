@@ -90,3 +90,14 @@ class Homework(db.Model):
 
     def __repr__(self):
         return '<Homework {}>'.format(self.name)
+
+class Test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(64))
+    name = db.Column(db.String(64))
+    due_date = db.Column(db.DateTime, index=True, default=datetime(2020, 9, 28))
+    done = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Test {}>'.format(self.name)
