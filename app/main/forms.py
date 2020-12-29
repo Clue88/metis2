@@ -88,3 +88,14 @@ class NewHomeworkForm(FlaskForm):
     submit_method = StringField('Submission Method')
     link = StringField('Assignment Link')
     submit = SubmitField('Add New Homework')
+
+class EditHomeworkForm(FlaskForm):
+    subject = SelectField('Subject', choices=[], validate_choice=False,
+        validators=[DataRequired()])
+    name = StringField('Assignment Name', validators=[DataRequired()])
+    # Due Date needs to be a StringField to allow for no date (empty string
+    # is not a valid date format)
+    due_date = StringField('Due Date')
+    submit_method = StringField('Submission Method')
+    link = StringField('Assignment Link')
+    submit = SubmitField('Save Homework')

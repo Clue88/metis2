@@ -71,10 +71,14 @@
                                 <td>N/A</td>
                                 {% endif %}
                                 <td>
-                                    <button class="button is-small is-info is-light" type="submit"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="button is-small is-info is-light" onclick="window.location.href='{{ url_for('main.edit_homework') + '?id=' }}{{ homework.id }}'">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
                                 </td>
                                 <td>
-                                    <button class="button is-small is-success is-light" type="submit"><i class="fas fa-check"></i></button>
+                                    <button class="button is-small is-success is-light" onclick="window.location.href='{{ url_for('main.new_homework') + '?id=' }}{{ homework.id }}'">
+                                        <i class="fas fa-check"></i>
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}

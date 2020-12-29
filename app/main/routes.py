@@ -2,7 +2,8 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 from app import db
 from app.main import bp
-from app.main.forms import EditProfileForm, EditClassesForm, NewHomeworkForm
+from app.main.forms import EditProfileForm, EditClassesForm, NewHomeworkForm, \
+    EditHomeworkForm
 from app.models import User, Homework
 import os
 from datetime import datetime
@@ -148,3 +149,41 @@ def new_homework():
         return redirect(url_for('main.index'))
     return render_template(
         'new_homework.html', title='New Homework', form=form, subjects=subjects)
+
+@bp.route('/edit_homework', methods=['GET', 'POST'])
+@login_required
+def edit_homework():
+    homework = Homework.query.filter(Homework.id == request.args.get('id')).first()
+    if homework.user_id != current_user.id:
+        return render_template('errors/500.html'), 500
+    
+    form = EditHomeworkForm()
+    if form.validate_on_submit():
+        homework.subject = form.subject.data
+        homework.name = form.name.data
+        homework.due_date = form.due_date.data
+        homework.submit = form.submit_method.data
+        homework.link = form.link.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('main.index'))
+    elif request.method == 'GET':
+        periods = []
+        for i in range(1, 11):
+            periods.append('period_' + str(i) + 'a')
+            periods.append('period_' + str(i) + 'b')
+
+        subjects = []
+        for field in periods:
+            if current_user[field] not in subjects and current_user[field] != 'Free Period':
+                subjects.append(current_user[field])
+
+        subject = homework.subject
+        form.name.data = homework.name
+        form.due_date.data = homework.due_date.strftime('%Y-%m-%d')
+        form.submit_method.data = homework.submit
+        form.link.data = homework.link
+    return render_template(
+        'edit_homework.html', title='Edit Homework', form=form,
+        subjects=subjects, subject=subject)
+    

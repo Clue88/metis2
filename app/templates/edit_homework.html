@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Edit Homework</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-light">
+                <form action="" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">{{ form.subject.label }}</label>
+                            <div class="select">
+                                {{ form.subject(class_='input') }}
+                            </div>
+                            {% for item in subjects %}
+                            <script>
+                                option = document.createElement("option");
+                                option.text = "{{ item }}";
+                                document.getElementById("subject").add(option);
+                            </script>
+                            {% endfor %}
+                            {% for error in form.subject.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <script>
+                        function setSelectedValue(selectObj, valueToSet) {
+                            for (var i = 0; i < selectObj.options.length; i++) {
+                                if (selectObj.options[i].text== valueToSet) {
+                                    selectObj.options[i].selected = true;
+                                    return;
+                                }
+                            }
+                        }
+
+                        setSelectedValue(document.getElementById("subject"), "{{ subject }}");
+                    </script>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">{{ form.name.label }}</label>
+                            {{ form.name(class_='input') }}
+                            {% for error in form.name.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">{{ form.due_date.label }}</label>
+                            {{ form.due_date(class_='input') }}
+                            {% for error in form.due_date.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <script>document.getElementById("due_date").type = "date"</script>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">{{ form.submit_method.label }}</label>
+                            {{ form.submit_method(class_='input') }}
+                            {% for error in form.submit_method.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">{{ form.link.label }}</label>
+                            {{ form.link(class_='input') }}
+                            {% for error in form.link.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            {{ form.submit(class_='input button is-primary') }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
