@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Login</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-light">
+                <form action="" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="field">
+                        <label class="label">{{ form.email.label }}</label>
+                        <div class="control">
+                            {{ form.email(class_='input') }}
+                            {% for error in form.email.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">{{ form.password.label }}</label>
+                        <div class="control">
+                            {{ form.password(class_='input') }}
+                            {% for error in form.password.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="checkbox">
+                            {{ form.remember_me() }}
+                            {{ form.remember_me.label }}
+                        </label>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            {{ form.submit(class_='input button is-link') }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child has-text-link box">
+                <a href="{{ url_for('auth.register') }}">New user? Register here.</a>
+            </article>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Profile</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+                <strong>Username: </strong> {{ current_user.username }}<br>
+                <strong>Email: </strong> {{ current_user.email }}<br><br>
+                <a href="{{ url_for('main.edit_profile') }}">Edit Personal Info</a><br>
+                <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+                <a href="{{ url_for('main.edit_classes') }}">Edit Classes</a><br><br>
+                {% for label, field in periods.items() %}
+                <strong>{{ label }}: </strong>{{ current_user[field] }}<br>
+                {% if label.endswith('Zoom (B)') %}
+                <br>
+                {% endif %}
+                {% endfor %}
+                <a href="{{ url_for('main.edit_classes') }}">Edit Classes</a>
+            </article>
+        </div>
+    </div>
+{% endblock %}

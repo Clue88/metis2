@@ -1,13 +1,10 @@
-# Copyright (c) 2020 Christopher Liu
-
 import os
+from dotenv import load_dotenv
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
-TEMPLATE_DIR = os.environ.get('TEMPLATES') or 'templates'
-TZ_NAME = os.environ.get('TZ_NAME') or 'US East'
-TZ_OFFSET = os.environ.get('TZ_OFFSET') or -5
-SCHEDULE_PATH = os.environ.get('SCHEDULE_PATH') or 'stuyfall20.csv'
-SCHEDULE_TIMES = os.environ.get('SCHEDULE_TIMES') or 'stuyfall20times.csv'
-USERS_DB = os.environ.get('USERS_DB') or 'users.db'
-NUM_PERIODS = os.environ.get('NUM_PERIODS') or 10
-HW_DB = os.environ.get('HW_DB') or 'hw.db'
-TEST_DB = os.environ.get('TEST_DB') or 'test.db'
+class Config(object):
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        'postgresql://postgres:postgres@localhost:5432/metis'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

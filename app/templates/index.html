@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Hello, {{ current_user.username }}!</p>
+                <p class="subtitle">Today is {{ date }}.</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-4">
+            <div class="tile is-child notification is-primary">
+                <p class="title">{{ day }}</p>
+                <div class="table-container">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Time</th>
+                                <th>Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subject in schedule %}
+                            <tr>
+                                <th>{{ subject.period }}</th>
+                                <td>{{ subject.times }}</td>
+                                {% if subject.link %}
+                                <td><a href="{{ subject.link }}" target="_blank">{{ subject.subject }}</a></td>
+                                {% else %}
+                                <td>{{ subject.subject }}</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-info">
+                <p class="title">Outstanding Assignments</p>
+                <div class="table-container">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Assignment</th>
+                                <th>Due</th>
+                                <th>Submit</th>
+                                <th>Edit</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for homework in homeworks %}
+                            <tr>
+                                <td>{{ homework.subject }}</td>
+                                <td>{{ homework.name }}</td>
+                                <td>{{ homework.due_date.strftime('%a %-m/%-d/%-y') }}</td>
+                                {% if homework.submit %}
+                                {% if homework.link %}
+                                <td><a href="{{ homework.link }}" target="_blank">{{ homework.submit }}</a></td>
+                                {% else %}
+                                <td>{{ homework.submit }}</td>
+                                {% endif %}
+                                {% else %}
+                                <td>N/A</td>
+                                {% endif %}
+                                <td>
+                                    <button class="button is-small is-info is-light" onclick="window.location.href='{{ url_for('main.edit_homework') + '?id=' }}{{ homework.id }}'">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="button is-small is-success is-light" onclick="window.location.href='{{ url_for('main.complete_homework') + '?id=' }}{{ homework.id }}'">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-8">
+            <div class="tile is-child notification is-danger">
+                <p class="title">Upcoming Tests</p>
+                <div class="table-container">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Test</th>
+                                <th>Date</th>
+                                <th>Edit</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for test in tests %}
+                            <tr>
+                                <td>{{ test.subject }}</td>
+                                <td>{{ test.name }}</td>
+                                <td>{{ test.due_date.strftime('%a %-m/%-d/%-y') }}</td>
+                                <td>
+                                    <button class="button is-small is-info is-light" onclick="window.location.href='{{ url_for('main.edit_test') + '?id=' }}{{ test.id }}'">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="button is-small is-success is-light" onclick="window.location.href='{{ url_for('main.complete_test') + '?id=' }}{{ test.id }}'">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-light">
+                <p class="title">Add New</p>
+                <button class="button is-info is-large" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Assignment</button>
+                <button class="button is-danger is-large" onclick="window.location.href='{{ url_for('main.new_test') }}'">Test</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

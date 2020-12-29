@@ -1,0 +1,89 @@
+<html lang="en">
+    <head>
+        {% if title %}
+        <title>Metis - {{ title }}</title>
+        {% else %}
+        <title>Metis</title>
+        {% endif %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='icon' href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon"/>
+        <link rel='apple-touch-icon' href="{{ url_for('static', filename='favicon.ico') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bulma.min.css') }}">
+        <script defer src="{{ url_for('static', filename='fontawesome.js') }}"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
+
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach( el => {
+                        el.addEventListener('click', () => {
+
+                        // Get the target from the "data-target" attribute
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+
+                        });
+                    });
+                }
+
+            });
+        </script>
+
+    </head>
+    <body style="margin:15px">
+        <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{{ url_for('main.index') }}">
+                    <img src="{{ url_for('static', filename='favicon.ico') }}" width="28" height="28">
+                </a>
+            
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="navbar-menu" id="navMenu">
+                <div class="navbar-start">
+                </div>
+                <div class="navbar-end">
+                    {% if current_user.is_anonymous %}
+                    <a class="navbar-item" href="{{ url_for('auth.login') }}">Login</a>
+                    {% else %}
+                    <a class="navbar-item" href="{{ url_for('main.schedule', username=current_user.username) }}">Schedule</a>
+                    <a class="navbar-item" href="{{ url_for('main.profile') }}">Profile</a>
+                    <a class="navbar-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-info is-light">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+        <footer>
+            <p class="has-text-centered has-text-grey-light"><small>
+                <u><a href="https://github.com/Clue88/metis2/issues" style="color:#b5b5b5">Bug Reports and Feedback</a></u><br>
+                Metis v0.2.0 | Copyright &copy; 2020-2021 Christopher Liu. All rights reserved.
+            </small></p>
+        </footer>
+    </body>
+</html>
