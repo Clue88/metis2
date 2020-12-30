@@ -6,13 +6,15 @@ from app.main.forms import EditProfileForm, EditClassesForm, NewHomeworkForm, \
     EditHomeworkForm, NewTestForm, EditTestForm
 from app.models import User, Homework, Test
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 @bp.route('/')
 @bp.route('/index')
 @login_required
 def index():
-    now = datetime.now()
+    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Standard Time'
+    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -5
+    now = datetime.now(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME))
 
     start = 0
     end = -1
