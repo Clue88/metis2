@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email
 from app.models import User
+from datetime import datetime
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -89,6 +90,13 @@ class NewHomeworkForm(FlaskForm):
     link = StringField('Assignment Link')
     submit = SubmitField('Add New Homework')
 
+    def validate_due_date(self, due_date):
+        try:
+            datetime.strptime(due_date.data, '%Y-%m-%d')
+        except ValueError:
+            if due_date.data != '': raise ValidationError(
+                'Please use the datepicker to enter a valid date.')
+
 class EditHomeworkForm(FlaskForm):
     subject = SelectField('Subject', choices=[], validate_choice=False,
         validators=[DataRequired()])
@@ -100,6 +108,13 @@ class EditHomeworkForm(FlaskForm):
     link = StringField('Assignment Link')
     submit = SubmitField('Save Homework')
 
+    def validate_due_date(self, due_date):
+        try:
+            datetime.strptime(due_date.data, '%Y-%m-%d')
+        except ValueError:
+            if due_date.data != '': raise ValidationError(
+                'Please use the datepicker to enter a valid date.')
+
 class NewTestForm(FlaskForm):
     subject = SelectField('Subject', choices=[], validate_choice=False,
         validators=[DataRequired()])
@@ -109,6 +124,13 @@ class NewTestForm(FlaskForm):
     due_date = StringField('Due Date')
     submit = SubmitField('Add New Test')
 
+    def validate_due_date(self, due_date):
+        try:
+            datetime.strptime(due_date.data, '%Y-%m-%d')
+        except ValueError:
+            if due_date.data != '': raise ValidationError(
+                'Please use the datepicker to enter a valid date.')
+
 class EditTestForm(FlaskForm):
     subject = SelectField('Subject', choices=[], validate_choice=False,
         validators=[DataRequired()])
@@ -117,3 +139,10 @@ class EditTestForm(FlaskForm):
     # is not a valid date format)
     due_date = StringField('Due Date')
     submit = SubmitField('Save Test')
+
+    def validate_due_date(self, due_date):
+        try:
+            datetime.strptime(due_date.data, '%Y-%m-%d')
+        except ValueError:
+            if due_date.data != '': raise ValidationError(
+                'Please use the datepicker to enter a valid date.')
