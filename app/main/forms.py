@@ -93,8 +93,8 @@ class NewHomeworkForm(FlaskForm):
     def validate_due_date(self, due_date):
         try:
             datetime.strptime(due_date.data, '%Y-%m-%d')
-        except ValueError:
-            if due_date.data != '': raise ValidationError(
+        except:
+            if due_date.data != '' and due_date.data is not None: raise ValidationError(
                 'Please use the datepicker to enter a valid date.')
 
 class EditHomeworkForm(FlaskForm):
@@ -111,8 +111,8 @@ class EditHomeworkForm(FlaskForm):
     def validate_due_date(self, due_date):
         try:
             datetime.strptime(due_date.data, '%Y-%m-%d')
-        except ValueError:
-            if due_date.data != '': raise ValidationError(
+        except:
+            if due_date.data != '' and due_date.data is not None: raise ValidationError(
                 'Please use the datepicker to enter a valid date.')
 
 class NewTestForm(FlaskForm):
@@ -127,8 +127,8 @@ class NewTestForm(FlaskForm):
     def validate_due_date(self, due_date):
         try:
             datetime.strptime(due_date.data, '%Y-%m-%d')
-        except ValueError:
-            if due_date.data != '': raise ValidationError(
+        except:
+            if due_date.data != '' and due_date.data is not None: raise ValidationError(
                 'Please use the datepicker to enter a valid date.')
 
 class EditTestForm(FlaskForm):
@@ -143,6 +143,6 @@ class EditTestForm(FlaskForm):
     def validate_due_date(self, due_date):
         try:
             datetime.strptime(due_date.data, '%Y-%m-%d')
-        except ValueError:
-            if due_date.data != '': raise ValidationError(
+        except:
+            if due_date.data != '' and due_date.data is not None: raise ValidationError(
                 'Please use the datepicker to enter a valid date.')
