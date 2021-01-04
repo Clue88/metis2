@@ -5,10 +5,13 @@
         <div class="tile is-parent">
             <article class="tile is-child box">
                 <p class="title">{{ username }}'s Schedule</p>
+                {% if username == current_user.username %}
                 <p>
                     This is a public link - if you'd like to share your
                     schedule with others, you can just send them to this page.
                 </p>
+                <a href="{{ url_for('main.edit_classes') }}">Edit Classes</a>
+                {% endif %}
             </article>
         </div>
     </div>
