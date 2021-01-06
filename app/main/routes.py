@@ -284,3 +284,41 @@ def schedule(username):
         subjects.append(user[field])
 
     return render_template('schedule.html', title=username+'\'s Schedule', username=username, subjects=subjects)
+
+@bp.route('/schedule_widget')
+@login_required
+def schedule_widget():
+    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Standard Time'
+    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -5
+    now = datetime.now(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME))
+
+    start = 0
+    end = -1
+    schedule_day = ''
+    with open(os.path.join(os.getcwd(), 'data/stuyfall20.csv')) as f:
+        lines = f.read().split('\n')
+        for line in lines:
+            if line.split(',')[0] == now.strftime('%-m/%-d/%-y'):
+                start = int(line.split(',')[2])
+                end = int(line.split(',')[3])
+                schedule_day = line.split(',')[1].lower()
+
+    times = []
+    with open(os.path.join(os.getcwd(), 'data/stuyfall20times.csv')) as f:
+        times = f.read().split('\n')
+
+    schedule = []
+    for i in range(start, end+1):
+        schedule_item = {
+            'period': i,
+            'times': times[i-1].split(',')[1] + ' - ' + times[i-1].split(',')[2],
+            'subject': current_user['period_' + str(i) + schedule_day],
+            'link': current_user['period_' + str(i) + schedule_day + '_zoom']
+        }
+        schedule.append(schedule_item)
+
+    if end == -1: day = 'No school today!'
+    else:
+        day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
+
+    return render_template('schedule_widget.html', title='Schedule Widget', day=day, schedule=schedule)

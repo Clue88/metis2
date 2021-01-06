@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor" style="max-height: 50%;">
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-primary">
+                <p class="title">{{ day }}</p>
+                <div class="table-container" style="max-height: 80%; overflow-y: auto;">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Time</th>
+                                <th>Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subject in schedule %}
+                            <tr>
+                                <th>{{ subject.period }}</th>
+                                <td>{{ subject.times }}</td>
+                                {% if subject.link %}
+                                <td><a href="{{ subject.link }}" target="_blank">{{ subject.subject }}</a></td>
+                                {% else %}
+                                <td>{{ subject.subject }}</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
