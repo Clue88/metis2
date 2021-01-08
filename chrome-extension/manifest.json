@@ -1,6 +1,6 @@
 {
     "name": "Metis Schedule",
-    "version": "1.1.0",
+    "version": "1.0.7",
     "description": "An academic dashboard to help Stuyvesant students get more organized.",
     "permissions": ["tabs", "<all_urls>"],
     "icons": {
