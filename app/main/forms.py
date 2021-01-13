@@ -100,7 +100,7 @@ class NewHomeworkForm(FlaskForm):
 class EditHomeworkForm(FlaskForm):
     subject = SelectField('Subject', choices=[], validate_choice=False,
         validators=[DataRequired(), Length(max=64)])
-    name = StringField('Assignment Name', validators=[DataRequired()])
+    name = StringField('Assignment Name', validators=[DataRequired(), Length(max=64)])
     # Due Date needs to be a StringField to allow for no date (empty string
     # is not a valid date format)
     due_date = StringField('Due Date')
