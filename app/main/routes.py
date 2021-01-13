@@ -166,7 +166,7 @@ def edit_homework():
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('main.index'))
-    elif request.method == 'GET':
+    else:
         periods = []
         for i in range(1, 11):
             periods.append('period_' + str(i) + 'a')
@@ -242,7 +242,7 @@ def edit_test():
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('main.index'))
-    elif request.method == 'GET':
+    else:
         periods = []
         for i in range(1, 11):
             periods.append('period_' + str(i) + 'a')
