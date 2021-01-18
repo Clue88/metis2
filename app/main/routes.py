@@ -42,6 +42,7 @@ def index():
         schedule.append(schedule_item)
 
     if end == -1: day = 'No school today!'
+    elif schedule_day == 'n': day = 'No live instruction today!'
     else:
         day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
 
@@ -318,6 +319,7 @@ def schedule_widget():
         schedule.append(schedule_item)
 
     if end == -1: day = 'No school today!'
+    elif schedule_day == 'n': day = 'No live instruction today!'
     else:
         day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
 
