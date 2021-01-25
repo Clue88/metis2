@@ -324,3 +324,7 @@ def schedule_widget():
         day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
 
     return render_template('schedule_widget.html', title='Schedule Widget', day=day, schedule=schedule)
+
+@bp.route('/resources')
+def resources():
+    return render_template('resources.html', title='Student Resources')
