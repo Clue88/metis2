@@ -19,7 +19,7 @@ def index():
     start = 0
     end = -1
     schedule_day = ''
-    with open(os.path.join(os.getcwd(), 'data/stuyfall20.csv')) as f:
+    with open(os.path.join(os.getcwd(), 'data/stuy_schedule.csv')) as f:
         lines = f.read().split('\n')
         for line in lines:
             if line.split(',')[0] == now.strftime('%-m/%-d/%-y'):
@@ -28,7 +28,7 @@ def index():
                 schedule_day = line.split(',')[1].lower()
 
     times = []
-    with open(os.path.join(os.getcwd(), 'data/stuyfall20times.csv')) as f:
+    with open(os.path.join(os.getcwd(), 'data/stuy_times.csv')) as f:
         times = f.read().split('\n')
 
     schedule = []
@@ -296,7 +296,7 @@ def schedule_widget():
     start = 0
     end = -1
     schedule_day = ''
-    with open(os.path.join(os.getcwd(), 'data/stuyfall20.csv')) as f:
+    with open(os.path.join(os.getcwd(), 'data/stuy_schedule.csv')) as f:
         lines = f.read().split('\n')
         for line in lines:
             if line.split(',')[0] == now.strftime('%-m/%-d/%-y'):
@@ -305,7 +305,7 @@ def schedule_widget():
                 schedule_day = line.split(',')[1].lower()
 
     times = []
-    with open(os.path.join(os.getcwd(), 'data/stuyfall20times.csv')) as f:
+    with open(os.path.join(os.getcwd(), 'data/stuy_times.csv')) as f:
         times = f.read().split('\n')
 
     schedule = []
