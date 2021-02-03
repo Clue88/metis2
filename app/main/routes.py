@@ -284,7 +284,9 @@ def schedule(username):
     for field in periods:
         subjects.append(user[field])
 
-    return render_template('schedule.html', title=username+'\'s Schedule', username=username, subjects=subjects)
+    users = len(User.query.all())
+
+    return render_template('schedule.html', title=username+'\'s Schedule', username=username, subjects=subjects, users=users)
 
 @bp.route('/schedule_widget')
 @login_required
