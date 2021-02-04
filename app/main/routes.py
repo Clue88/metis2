@@ -53,10 +53,12 @@ def index():
         Test.user_id==current_user.id, Test.done==False).order_by(Test.due_date)
 
     date = now.strftime('%A, %B %-d, %Y')
+
+    light = current_user.username == 'Andrea'
     
     return render_template(
         'index.html', title='Home', date=date, day=day, homeworks=homeworks,
-        tests=tests, schedule=schedule)
+        tests=tests, schedule=schedule, light=light)
 
 @bp.route('/profile')
 @login_required

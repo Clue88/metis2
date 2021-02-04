@@ -12,7 +12,11 @@
 
     <div class="tile is-ancestor" style="max-height: 50%;">
         <div class="tile is-parent is-4">
+            {% if light %}
+            <div class="tile is-child notification is-success is-light">
+            {% else %}
             <div class="tile is-child notification is-primary">
+            {% endif %}
                 <p class="title">{{ day }}</p>
                 <div class="table-container" style="max-height: 80%; overflow-y: auto;">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -41,7 +45,11 @@
             </div>
         </div>
         <div class="tile is-parent">
+            {% if light %}
+            <div class="tile is-child notification is-info is-light">
+            {% else %}
             <div class="tile is-child notification is-info">
+            {% endif %}
                 <p class="title">Outstanding Assignments</p>
                 <div class="table-container" style="max-height: 80%; overflow-y: auto;">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -91,7 +99,11 @@
 
     <div class="tile is-ancestor"  style="max-height: 35%;">
         <div class="tile is-parent is-8">
+            {% if light %}
+            <div class="tile is-child notification is-danger is-light">
+            {% else %}
             <div class="tile is-child notification is-danger">
+            {% endif %}
                 <p class="title">Upcoming Tests</p>
                 <div class="table-container" style="max-height: 70%; overflow-y: auto;">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -130,8 +142,13 @@
         <div class="tile is-parent">
             <div class="tile is-child notification is-light">
                 <p class="title">Add New</p>
+                {% if light %}
+                <button class="button is-info is-large is-light" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Assignment</button>
+                <button class="button is-danger is-large is-light" onclick="window.location.href='{{ url_for('main.new_test') }}'">Test</button>
+                {% else %}
                 <button class="button is-info is-large" onclick="window.location.href='{{ url_for('main.new_homework') }}'">Assignment</button>
                 <button class="button is-danger is-large" onclick="window.location.href='{{ url_for('main.new_test') }}'">Test</button>
+                {% endif %}
             </div>
         </div>
     </div>
