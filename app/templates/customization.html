@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">Customization Options</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <div class="tile is-child notification is-light">
+                <form action="" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="field">
+                        <label class="label">{{ form.theme.label }}</label>
+                        <div class="control">
+                            <div class="select">
+                                {{ form.theme(class_='input') }}
+                            </div>
+                            {% for error in form.theme.errors %}
+                            <span class="help has-text-danger">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            {{ form.submit(class_='input button is-primary') }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

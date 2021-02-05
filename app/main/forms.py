@@ -146,3 +146,8 @@ class EditTestForm(FlaskForm):
         except:
             if due_date.data != '' and due_date.data is not None: raise ValidationError(
                 'Please use the datepicker to enter a valid date.')
+
+class CustomizationForm(FlaskForm):
+    theme = SelectField('Theme', choices=['Default', 'Light'],
+        validators=[DataRequired()])
+    submit = SubmitField('Save')

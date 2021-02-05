@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from app import db
 from app.main import bp
 from app.main.forms import EditProfileForm, EditClassesForm, NewHomeworkForm, \
-    EditHomeworkForm, NewTestForm, EditTestForm
+    EditHomeworkForm, NewTestForm, EditTestForm, CustomizationForm
 from app.models import User, Homework, Test
 import os
 from datetime import datetime, timezone, timedelta
@@ -335,3 +335,16 @@ def resources():
 def users_count():
     users = len(User.query.all())
     return render_template('users_count.html', users=users)
+
+@bp.route('/customization', methods=['GET', 'POST'])
+@login_required
+def customization():
+    form = CustomizationForm()
+    if form.validate_on_submit():
+        current_user.theme = form.theme.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('main.profile'))
+    elif request.method == 'GET':
+        form.theme.data = current_user.theme
+    return render_template('customization.html', title='Customization', form=form)
