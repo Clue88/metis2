@@ -59,6 +59,8 @@ class User(UserMixin, db.Model):
     period_10b = db.Column(db.String(256))
     period_10b_zoom = db.Column(db.String(256))
 
+    light_mode = db.Column(db.Boolean, default=False)
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
