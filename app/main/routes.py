@@ -54,7 +54,7 @@ def index():
 
     date = now.strftime('%A, %B %-d, %Y')
 
-    light = current_user.username == 'Andrea'
+    light = current_user.username == 'Andrea' or current_user.theme == 'Light'
     
     return render_template(
         'index.html', title='Home', date=date, day=day, homeworks=homeworks,
