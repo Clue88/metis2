@@ -27,6 +27,11 @@
                                 document.getElementById("subject").add(option);
                             </script>
                             {% endfor %}
+                            <script>
+                                option = document.createElement("option");
+                                option.text = "Misc.";
+                                document.getElementById("subject").add(option);
+                            </script>
                             {% for error in form.subject.errors %}
                             <span class="help has-text-danger">[{{ error }}]</span>
                             {% endfor %}
