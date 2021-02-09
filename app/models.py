@@ -60,6 +60,7 @@ class User(UserMixin, db.Model):
     period_10b_zoom = db.Column(db.String(256))
 
     theme = db.Column(db.String(120), default='Default')
+    popup = db.Column(db.Boolean, default=True)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
