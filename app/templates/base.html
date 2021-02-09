@@ -50,6 +50,20 @@
                 });
             });
 
+            document.addEventListener('DOMContentLoaded', () => {
+                if (document.getElementsByClassName("modal-background").length > 0) {
+                    document.getElementsByClassName("modal-background")[0].addEventListener('click', () => {
+                        document.getElementsByClassName("modal")[0].classList.toggle("is-active");
+                    });
+                };
+
+                if (document.getElementsByClassName("modal-close").length > 0) {
+                    document.getElementsByClassName("modal-close")[0].addEventListener('click', () => {
+                        document.getElementsByClassName("modal")[0].classList.toggle("is-active");
+                    });
+                };
+            });
+
         </script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->

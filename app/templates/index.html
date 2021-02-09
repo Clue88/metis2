@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% if popup %}
+    <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <p class="title">Test</p>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    {% endif %}
+
     <div class="tile is-ancestor">
         <div class="tile is-parent">
             <article class="tile is-child box">

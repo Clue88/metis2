@@ -55,10 +55,13 @@ def index():
     date = now.strftime('%A, %B %-d, %Y')
 
     light = current_user.username == 'Andrea' or current_user.theme == 'Light'
+    popup = current_user.popup
+    current_user.popup = False
+    db.session.commit()
     
     return render_template(
         'index.html', title='Home', date=date, day=day, homeworks=homeworks,
-        tests=tests, schedule=schedule, light=light)
+        tests=tests, schedule=schedule, light=light, popup=popup)
 
 @bp.route('/profile')
 @login_required
