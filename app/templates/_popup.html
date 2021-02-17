@@ -2,10 +2,17 @@
     <div class="modal-background"></div>
     <div class="modal-content">
         <div class="box">
-            <p class="title">Hello!</p>
-            <p>
-                We've changed the colors! Hooray!
-            </p>
+            <div class="content">
+                <p class="title">Metis v1.0.12: What's New?</p>
+                <p>Welcome back from midwinter recess! We've added some new features that we hope you'll love – this is a recap of recent changes to the platform.</p>
+                <ul>
+                    <li>Tables for outstanding assignments and upcoming tests now scroll instead of taking up the whole page.</li>
+                    <li>The <a href="{{ url_for('main.resources') }}" target="_blank">resources</a> tab! Come here to find commonly-used resources for Stuyvesant students.</li>
+                    <li>New colors! We've adopted a lighter theme upon popular demand. However, if you'd like to switch back to the old version, click <a href="{{ url_for('main.customization') }}" target="_blank">here</a> or go to your profile settings to change it back.</li>
+                    <li>Bug fixes and performance enhancements.</li>
+                </ul>
+                <p>In other news, we recently passed 250 users and 12,000 website views! Thank you so much to all of you who have been using this app and have found this project useful – we really appreciate it..</p>
+            </div>
         </div>
     </div>
     <button class="modal-close is-large" aria-label="close"></button>

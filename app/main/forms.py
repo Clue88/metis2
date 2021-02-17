@@ -148,6 +148,6 @@ class EditTestForm(FlaskForm):
                 'Please use the datepicker to enter a valid date.')
 
 class CustomizationForm(FlaskForm):
-    theme = SelectField('Theme', choices=['Default', 'Light'],
+    theme = SelectField('Theme', choices=['Classic', 'Light'],
         validators=[DataRequired()])
     submit = SubmitField('Save')
