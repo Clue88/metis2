@@ -201,6 +201,7 @@ def complete_homework():
 
     homework.done = True
     db.session.commit()
+    flash('Assignment Done!')
     return redirect(url_for('main.index'))
 
 @bp.route('/new_test', methods=['GET', 'POST'])
@@ -275,6 +276,7 @@ def complete_test():
 
     test.done = True
     db.session.commit()
+    flash('Test Done!')
     return redirect(url_for('main.index'))
 
 @bp.route('/schedule/<username>')
