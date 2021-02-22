@@ -110,10 +110,12 @@
         {% if 'Test Done!' in messages or 'Assignment Done!' in messages %}
         <script defer>
             document.addEventListener('DOMContentLoaded', () => {
+                confetti.speed = 4;
+                confetti.maxCount = 300;
                 confetti.start();
                 setTimeout(function () {
                     confetti.stop();
-                }, 500);
+                }, 1000);
             });
         </script>
         {% endif %}
