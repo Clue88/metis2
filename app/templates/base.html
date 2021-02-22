@@ -107,6 +107,16 @@
             </div>
         </nav>
         {% with messages = get_flashed_messages() %}
+        {% if 'Test Done!' in messages or 'Assignment Done!' in messages %}
+        <script defer>
+            document.addEventListener('DOMContentLoaded', () => {
+                confetti.start();
+                setTimeout(function () {
+                    confetti.stop();
+                }, 500);
+            });
+        </script>
+        {% endif %}
         {% if messages %}
         <div class="notification is-info is-light">
             <button class="delete"></button>
