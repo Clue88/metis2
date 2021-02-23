@@ -27,7 +27,11 @@
     <body>
         <div class="tile is-ancestor" style="padding:0">
             <div class="tile is-parent">
+                {% if light %}
+                <div class="tile is-child notification is-success is-light">
+                {% else %}
                 <div class="tile is-child notification is-primary">
+                {% endif %}
                     <p class="title">{{ day }}</p>
                     <div class="table-container">
                         <table class="table is-striped is-hoverable is-fullwidth">

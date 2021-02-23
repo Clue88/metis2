@@ -330,7 +330,11 @@ def schedule_widget():
     else:
         day = 'Day ' + schedule_day.upper() + ' (' + str(start) + '-' + str(end) + ')'
 
-    return render_template('schedule_widget.html', title='Schedule Widget', day=day, schedule=schedule)
+    light = current_user.username == 'Andrea' or current_user.theme == 'Light'
+
+    return render_template(
+        'schedule_widget.html', title='Schedule Widget', day=day,
+        schedule=schedule, light=light)
 
 @bp.route('/resources')
 def resources():
