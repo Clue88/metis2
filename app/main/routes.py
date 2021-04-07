@@ -12,8 +12,8 @@ from datetime import datetime, timezone, timedelta
 @bp.route('/index')
 @login_required
 def index():
-    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Standard Time'
-    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -5
+    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Daylight Time'
+    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -4
     now = datetime.now(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME))
 
     start = 0
@@ -296,8 +296,8 @@ def schedule(username):
 @bp.route('/schedule_widget')
 @login_required
 def schedule_widget():
-    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Standard Time'
-    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -5
+    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Daylight Time'
+    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -4
     now = datetime.now(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME))
 
     start = 0
