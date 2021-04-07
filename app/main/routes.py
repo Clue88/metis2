@@ -8,12 +8,13 @@ from app.models import User, Homework, Test
 import os
 from datetime import datetime, timezone, timedelta
 
+TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Daylight Time'
+TZ_OFFSET = os.environ.get('TZ_OFFSET') or -4
+
 @bp.route('/')
 @bp.route('/index')
 @login_required
 def index():
-    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Daylight Time'
-    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -4
     now = datetime.now(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME))
 
     start = 0
@@ -296,8 +297,6 @@ def schedule(username):
 @bp.route('/schedule_widget')
 @login_required
 def schedule_widget():
-    TZ_NAME = os.environ.get('TZ_NAME') or 'Eastern Daylight Time'
-    TZ_OFFSET = os.environ.get('TZ_OFFSET') or -4
     now = datetime.now(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME))
 
     start = 0
