@@ -28,6 +28,7 @@ def index():
     start = 0
     end = -1
     schedule_day = ""
+    bell_schedule = ""
     with open(os.path.join(os.getcwd(), "data/stuy_schedule.csv")) as f:
         lines = f.read().split("\n")
         for line in lines:
@@ -35,18 +36,26 @@ def index():
                 start = int(line.split(",")[2])
                 end = int(line.split(",")[3])
                 schedule_day = line.split(",")[1].lower()
+                bell_schedule = line.split(",")[4]
 
     times = []
-    with open(os.path.join(os.getcwd(), "data/stuy_times.csv")) as f:
-        times = f.read().split("\n")
+    if bell_schedule == "R":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_regular.csv")) as f:
+            times = f.read().split("\n")
+    elif bell_schedule == "H":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_homeroom.csv")) as f:
+            times = f.read().split("\n")
+    elif bell_schedule == "C":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_conference.csv")) as f:
+            times = f.read().split("\n")
 
     schedule = []
     for i in range(start, end + 1):
         schedule_item = {
             "period": i,
             "times": times[i - 1].split(",")[1] + " - " + times[i - 1].split(",")[2],
-            "subject": current_user["period_" + str(i) + schedule_day],
-            "link": current_user["period_" + str(i) + schedule_day + "_zoom"],
+            "subject": current_user["period_" + str(i) + schedule_day[0]],
+            "link": current_user["period_" + str(i) + schedule_day[0] + "_zoom"],
         }
         schedule.append(schedule_item)
 
@@ -368,6 +377,7 @@ def schedule_widget():
     start = 0
     end = -1
     schedule_day = ""
+    bell_schedule = ""
     with open(os.path.join(os.getcwd(), "data/stuy_schedule.csv")) as f:
         lines = f.read().split("\n")
         for line in lines:
@@ -375,18 +385,26 @@ def schedule_widget():
                 start = int(line.split(",")[2])
                 end = int(line.split(",")[3])
                 schedule_day = line.split(",")[1].lower()
+                bell_schedule = line.split(",")[4]
 
     times = []
-    with open(os.path.join(os.getcwd(), "data/stuy_times.csv")) as f:
-        times = f.read().split("\n")
+    if bell_schedule == "R":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_regular.csv")) as f:
+            times = f.read().split("\n")
+    elif bell_schedule == "H":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_homeroom.csv")) as f:
+            times = f.read().split("\n")
+    elif bell_schedule == "C":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_conference.csv")) as f:
+            times = f.read().split("\n")
 
     schedule = []
     for i in range(start, end + 1):
         schedule_item = {
             "period": i,
             "times": times[i - 1].split(",")[1] + " - " + times[i - 1].split(",")[2],
-            "subject": current_user["period_" + str(i) + schedule_day],
-            "link": current_user["period_" + str(i) + schedule_day + "_zoom"],
+            "subject": current_user["period_" + str(i) + schedule_day[0]],
+            "link": current_user["period_" + str(i) + schedule_day[0] + "_zoom"],
         }
         schedule.append(schedule_item)
 
