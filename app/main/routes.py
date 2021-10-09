@@ -48,6 +48,9 @@ def index():
     elif bell_schedule == "C":
         with open(os.path.join(os.getcwd(), "data/stuy_times_conference.csv")) as f:
             times = f.read().split("\n")
+    elif bell_schedule == "S":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_special.csv")) as f:
+            times = f.read().split("\n")
 
     schedule = []
     for i in range(start, end + 1):
@@ -396,6 +399,9 @@ def schedule_widget():
             times = f.read().split("\n")
     elif bell_schedule == "C":
         with open(os.path.join(os.getcwd(), "data/stuy_times_conference.csv")) as f:
+            times = f.read().split("\n")
+    elif bell_schedule == "S":
+        with open(os.path.join(os.getcwd(), "data/stuy_times_special.csv")) as f:
             times = f.read().split("\n")
 
     schedule = []
