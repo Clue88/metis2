@@ -71,7 +71,7 @@ def index():
 
     homeworks = Homework.query.filter(
         Homework.user_id == current_user.id, Homework.done == False
-    ).order_by(Homework.due_date)
+    ).order_by(Homework.due_date, Homework.name)
 
     tests = Test.query.filter(
         Test.user_id == current_user.id, Test.done == False
