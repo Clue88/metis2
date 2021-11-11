@@ -79,7 +79,7 @@ def index():
 
     date = now.strftime("%A, %B %-d, %Y")
 
-    light = current_user.username == "Andrea" or current_user.theme == "Light"
+    light = current_user.theme == "Light"
     popup = current_user.popup
     current_user.popup = False
     db.session.commit()
@@ -421,7 +421,7 @@ def schedule_widget():
     else:
         day = "Day " + schedule_day.upper() + " (" + str(start) + "-" + str(end) + ")"
 
-    light = current_user.username == "Andrea" or current_user.theme == "Light"
+    light = current_user.theme == "Light"
 
     return render_template(
         "schedule_widget.html",

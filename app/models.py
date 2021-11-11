@@ -88,7 +88,7 @@ class Homework(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(64))
     name = db.Column(db.String(64))
-    due_date = db.Column(db.DateTime, index=True, default=datetime(2020, 9, 28))
+    due_date = db.Column(db.DateTime, index=True, default=datetime(2020, 3, 13))
     submit = db.Column(db.String(64))
     link = db.Column(db.String(512))
     done = db.Column(db.Boolean, default=False)
@@ -102,7 +102,7 @@ class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(64))
     name = db.Column(db.String(64))
-    due_date = db.Column(db.DateTime, index=True, default=datetime(2020, 9, 28))
+    due_date = db.Column(db.DateTime, index=True, default=datetime(2020, 3, 13))
     done = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
