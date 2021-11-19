@@ -15,8 +15,10 @@ from app.models import User, Homework, Test
 import os
 from datetime import datetime, timezone, timedelta
 
-TZ_NAME = os.environ.get("TZ_NAME") or "Eastern Daylight Time"
-TZ_OFFSET = os.environ.get("TZ_OFFSET") or -4
+# TZ_NAME = os.environ.get("TZ_NAME") or "Eastern Daylight Time"
+# TZ_OFFSET = os.environ.get("TZ_OFFSET") or -4
+TZ_NAME = os.environ.get("TZ_NAME") or "Eastern Standard Time"
+TZ_OFFSET = os.environ.get("TZ_OFFSET") or -5
 
 
 @bp.route("/")
