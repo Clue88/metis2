@@ -69,7 +69,11 @@
                         </thead>
                         <tbody>
                             {% for homework in homeworks %}
+                            {% if homework.due_date < now + timedelta(days=1) %}
+                            <tr style="font-weight: bold;">
+                            {% else %}
                             <tr>
+                            {% endif %}
                                 <td>{{ homework.subject }}</td>
                                 <td>{{ homework.name }}</td>
                                 <td>{{ homework.due_date.strftime('%a %-m/%-d/%-y') }}</td>
