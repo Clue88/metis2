@@ -89,7 +89,7 @@ def index():
     return render_template(
         "index.html",
         title="Home",
-        now=now,
+        tomorrow=now + timedelta(days=1),
         date=date,
         day=day,
         homeworks=homeworks,
