@@ -69,7 +69,7 @@
                         </thead>
                         <tbody>
                             {% for homework in homeworks %}
-                            {% if homework.due_date.replace(tzinfo=tz) < tomorrow %}
+                            {% if homework.due_date.replace(tzinfo=tz) < tomorrow and homework.id != 4797 %}
                             <tr style="font-weight: bold;">
                             {% else %}
                             <tr>
