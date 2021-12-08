@@ -97,6 +97,8 @@ def index():
         schedule=schedule,
         light=light,
         popup=popup,
+        TZ_NAME=TZ_NAME,
+        TZ_OFFSET=TZ_OFFSET
     )
 
 

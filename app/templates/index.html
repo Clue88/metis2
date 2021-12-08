@@ -69,7 +69,7 @@
                         </thead>
                         <tbody>
                             {% for homework in homeworks %}
-                            {% if homework.due_date < tomorrow %}
+                            {% if homework.due_date.localize(tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME)) < tomorrow %}
                             <tr style="font-weight: bold;">
                             {% else %}
                             <tr>
