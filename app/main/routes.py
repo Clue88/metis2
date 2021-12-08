@@ -97,8 +97,7 @@ def index():
         schedule=schedule,
         light=light,
         popup=popup,
-        TZ_NAME=TZ_NAME,
-        TZ_OFFSET=TZ_OFFSET
+        tz=timezone(timedelta(hours=TZ_OFFSET), TZ_NAME)
     )
 
 
