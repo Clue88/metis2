@@ -83,7 +83,7 @@ $ sudo supervisorctl reload
 
 ### Nginx Setup
 Certs should be put into the `/certs` directory as `cert.pem` and `key.pem`.
-Follow the instructions on https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx.
+Follow the instructions on https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal.
 ```
 $ sudo cp deployment/nginx/metis /etc/nginx/sites-enabled
 $ sudo service nginx reload
