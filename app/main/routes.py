@@ -152,7 +152,7 @@ def edit_classes():
                         or form[field[:-1] + "a"].data != ""
                     ):
                         current_user[field] = form[field[:-1] + "a"].data
-                if field.endswith("b_zoom"):
+                if field.endswith("b_zoom") and not form[field[:-5]]:
                     if (
                         form[field[:-6] + "a_zoom"].data is not None
                         or form[field[:-6] + "a_zoom"].data != ""
